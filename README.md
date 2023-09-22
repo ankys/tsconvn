@@ -1,4 +1,5 @@
 ---
+plugins: ["numbered-headings"]
 output:
   pdf_document:
     extra_dependencies: ["physics"]
