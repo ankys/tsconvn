@@ -1,0 +1,55 @@
+{
+	"latex-workshop.docker.enabled": true,
+	"latex-workshop.docker.image.latex": "paperist/texlive-ja",
+	"latex-workshop.latex.tools": [
+		{
+			"name": "latexmk",
+			"command": "latexmk",
+			"args": [
+				// "-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-outdir=%OUTDIR%",
+				"%DOC%"
+			],
+			"env": {}
+		}
+	],
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "latexmk",
+			"tools": [
+				"latexmk"
+			]
+		}
+	],
+	"latex-workshop.latex.clean.method": "glob",
+	"latex-workshop.latex.autoClean.run": "onBuilt",
+	"latex-workshop.latex.clean.fileTypes": [
+		"%DOCFILE%.aux",
+		"%DOCFILE%.bbl",
+		"%DOCFILE%.blg",
+		"%DOCFILE%.idx",
+		"%DOCFILE%.ind",
+		"%DOCFILE%.lof",
+		"%DOCFILE%.lot",
+		"%DOCFILE%.out",
+		"%DOCFILE%.toc",
+		"%DOCFILE%.acn",
+		"%DOCFILE%.acr",
+		"%DOCFILE%.alg",
+		"%DOCFILE%.glg",
+		"%DOCFILE%.glo",
+		"%DOCFILE%.gls",
+		"%DOCFILE%.fls",
+		"%DOCFILE%.log",
+		"%DOCFILE%.fdb_latexmk",
+		"%DOCFILE%.snm",
+		"%DOCFILE%.synctex(busy)",
+		"%DOCFILE%.synctex.gz(busy)",
+		"%DOCFILE%.nav",
+		"%DOCFILE%.vrb",
+		"%DOCFILE%.ilg",
+		"%DOCFILE%.dvi"
+	]
+}
