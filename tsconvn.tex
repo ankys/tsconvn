@@ -499,7 +499,7 @@ u_\e = 0 & \text{on $\partial\Omega$,} \\
 を考える。
 ここで$A(x, y)$は各成分が$L^\infty(\Omega; C(\TN))$な$N$次正方行列として$\alpha > 0$が存在して一様楕円性条件
 $$
-A(x, y)\xi\cdot\xi \ge \alpha\abs{\xi} \quad \forall x \in \Omega, y \in \TN, \xi \in \RN
+A(x, y)\xi\cdot\xi \ge \alpha\abs{\xi}^2 \quad \forall x \in \Omega, y \in \TN, \xi \in \RN
 $$
 を満たすとする。
 $f(x) \in L^2(\Omega)$とする。
@@ -535,7 +535,7 @@ $\e \to 0$で$u_\e(x)$は$u(x)$に$H^1_0(\Omega)$弱収束し、$\D u_\e(x)$は$
 \begin{proof}
 前節の定理より部分列を取れば$u$, $v$が存在して$u_\e(x)$は$u(x)$に$H^1_0(\Omega)$弱収束し$\D u_\e(x)$は$\D u(x)+\D_y v(x, y)$に二スケール弱収束する。
 あとはこの$u$, $v$が二スケール均質化方程式系の解になっていることを示せば、解の一意性より結論が従う。
-滑らかな試験関数$\phi(x) \in H^1_0(\Omega)$と$\psi \in L^2(\Omega; H^1(\TN))$を固定して、\eqref{e_e_eqw}の$\phi$として$\phi_\e(x) = \phi(x)+\e\psi(x, y)$を代入すると
+滑らかな試験関数$\phi(x) \in H^1_0(\Omega)$と$\psi \in L^2(\Omega; H^1(\TN))$を固定して、\eqref{e_e_eqw}の$\phi$として$\phi_\e(x) = \phi(x)+\e\psi(x, \frac{x}{\e})$を代入すると
 $$
 \int_\Omega A(x, \frac{x}{\e})\D u_\e(x)\cdot\D \phi_\e(x)\dd{x}
 = \int_\Omega f(x)\phi_\e(x)\dd{x}
