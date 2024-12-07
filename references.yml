@@ -1,0 +1,30 @@
+r_a92:
+  type: Article
+  author: G. Allaire
+  title: Homogenization and two-scale convergence
+  parent:
+    title: SIAM J. Math. Anal.
+    volume: 23
+    issue: 6
+  page-range: 1482-1518
+  date: 1992
+r_lnw02:
+  type: Article
+  author: D. Lukkassen, G. Nguetseng, P. Wall
+  title: Two-scale convergence
+  parent:
+    title: Int. J. Pure Appl. Math.
+    volume: 2
+    issue: 1
+  page-range: 35-86
+  date: 2002
+r_n89:
+  type: Article
+  author: G. Nguetseng
+  title: A general convergence result for a functional related to the theory of homogenization
+  parent:
+    title: SIAM J. Math. Anal.
+    volume: 20
+    issue: 3
+  page-range: 608-623
+  date: 1989

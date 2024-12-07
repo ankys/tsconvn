@@ -51,5 +51,8 @@
 		"%DOCFILE%.vrb",
 		"%DOCFILE%.ilg",
 		"%DOCFILE%.dvi"
+	],
+	"tinymist.fontPaths": [
+		"./fonts/"
 	]
 }
