@@ -27,10 +27,6 @@
 		【#name】#body #h(1fr)【証明終わり】
 	]
 }
-#show figure: it => {
-	set align(left)
-	it
-}
 
 #import "deps/autoeqnum.typ": autoeqnum
 
