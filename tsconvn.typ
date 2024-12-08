@@ -4,13 +4,11 @@
 #let date = datetime.today().display("[year]年[month]月[day]日")
 
 #import "@preview/rubber-article:0.1.0": *
-#show: article.with()
-
-#set text(lang: "ja")
+#show: article.with(lang: "ja")
 // #set text(font: ("YuMincho", "Zen Old Mincho", "Zen Kaku Gothic New"))
 
 #import "@preview/physica:0.9.3": dv, dd
-#import "@preview/ctheorems:1.1.2": thmrules, thmplain, thmbox, thmproof
+#import "@preview/ctheorems:1.1.3": thmrules, thmplain, thmbox, thmproof
 
 #show: thmrules.with()
 #let theorem = thmbox("theorem", "定理", stroke: black)
@@ -71,7 +69,7 @@ $
 ここで熱伝導係数$a_epsilon (x)$は位置$x$に依存する周期$epsilon$の関数で$inf_(x, epsilon) a_epsilon (x) = : alpha > 0$とする。
 均質化の数学的な定式化は方程式の係数$a_epsilon (x)$が
 $
-a_epsilon (x) = a (x / epsilon)
+a_epsilon (x) = a(x / epsilon)
 $
 となる、より正確には周期$1$の関数$a$が存在して上のように書けたとするとき、
 $epsilon -> 0$での解$u_epsilon$の挙動、つまり$u_epsilon$は収束するか極限方程式は何かというを考えることになる。
