@@ -9,8 +9,6 @@
 #set text(lang: "ja")
 // #set text(font: ("YuMincho", "Zen Old Mincho", "Zen Kaku Gothic New"))
 
-#show heading.where(level: 2): set heading(level: 1)
-
 #import "@preview/physica:0.9.3": dv, dd
 #import "@preview/ctheorems:1.1.2": thmrules, thmplain, thmbox, thmproof
 
@@ -36,31 +34,17 @@
 	it
 }
 
+#import "deps/autoeqnum.typ": autoeqnum
+
+#show heading.where(level: 2): set heading(level: 1)
 #show heading.where(level: 2): it => {
 	counter(math.equation).update(0)
-	counter(heading.where(level: 2)).step()
 	it
 }
-#let numbering_eq = it => {
-	let count = counter(heading.where(level: 2)).get().first()
+#show: autoeqnum.with(numbering: it => {
+	let count = counter(heading.where(level: 1)).get().first()
 	numbering("(1.1)", count, it)
-}
-#set math.equation(numbering: numbering_eq)
-#show math.equation.where(block: true, numbering: numbering_eq): it => {
-	if it.has("label") and counter("autonum?" + str(it.at("label"))).final().at(0) == 1 {
-		it
-	} else {
-		counter(math.equation).update(n => n - 1)
-		math.equation(it.body, block: true, numbering: none)
-	}
-}
-#show ref: it => {
-	let el = it.element
-	if el != none and el.func() == math.equation {
-		counter("autonum?" + str(it.target)).update(1)
-	}
-	it
-}
+})
 
 #let div = $op("div")$
 
