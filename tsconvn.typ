@@ -130,13 +130,13 @@ $
 
 == 二スケール収束の基本定理
 
-$Omega$を$bb(R)^N$の（有界とは限らない）ボレル可測集合として、$f = f(x, y): Omega times bb(R)^N -> bb(R)$を$y$について$bb(Z)^N$-周期的つまり
+$Omega$を$RR^N$の（有界とは限らない）ボレル可測集合として、$f = f(x, y): Omega times RR^N -> RR$を$y$について$ZZ^N$-周期的つまり
 $
-f(x, y+z) = f(x, y) quad forall z in bb(Z)^N
+f(x, y+z) = f(x, y) quad forall z in ZZ^N
 $
 を満たすとする。
-このような関数を簡単のため平坦トーラス$bb(T)^N := bb(R)^N\/bb(Z)^N$を用いて$f: Omega times bb(T)^N -> bb(R)$と表す。
-$square$を$bb(R)^N$の単位立方体、つまり$square = \[0, 1\)^N$とする。
+このような関数を簡単のため平坦トーラス$TT^N := RR^N\/ZZ^N$を用いて$f: Omega times TT^N -> RR$と表す。
+$square$を$RR^N$の単位立方体、つまり$square = \[0, 1\)^N$とする。
 
 この節の目標は$f$の何らかの仮定の下で次の極限に関する式
 $
@@ -147,12 +147,12 @@ lim_(epsilon -> 0) integral_Omega f(x, x/epsilon) dd(x)
 $ <e_tsconv_p>
 を示すことである。
 ここで$lr(angle.l f(x, y) angle.r)_y = 1/abs(square) integral_square f(x, y) dd(y)$は$f(x, y)$の$y$変数に関する平均を表す。
-$abs(square)$は$square$のルベーグ測度でありその値は$1$であるが、$bb(Z)^N$-周期的とは限らない場合のためにこのように書いている。
+$abs(square)$は$square$のルベーグ測度でありその値は$1$であるが、$ZZ^N$-周期的とは限らない場合のためにこのように書いている。
 また、最左辺の$epsilon$は正の実数を、第2辺の$n$は正の整数を想定しているため、最左辺と最右辺が一致することを示せば十分である。
 この@e_tsconv_p のことを本ノートでは_二スケール収束の基本公式_と呼ぶことにする。
 
 この二スケール収束の基本公式は連続関数およびリーマン積分の枠組みだと示しやすい。
-例えば簡単のために$Omega$を1次元の有界閉区間$[0 , M]$で$M$は正の整数、$f = f(x, y): [0, M] times bb(T) -> bb(R)$を連続関数として、二スケール収束の基本公式
+例えば簡単のために$Omega$を1次元の有界閉区間$[0 , M]$で$M$は正の整数、$f = f(x, y): [0, M] times TT -> RR$を連続関数として、二スケール収束の基本公式
 $
 lim_(n -> oo) integral_0^M f(x, n x) dd(x)
 = integral_0^M integral_0^1 f(x, y) dd(y) dd(x)
@@ -173,26 +173,26 @@ $
 頑張ればこれも示すことができるので詳細省略。
 
 このようにして連続関数の枠組みでは比較的容易に証明することができるが、偏微分方程式に応用することを考えると関数の入る空間をより拡張する必要がある。
-しかしながら、@e_tsconv_p の右辺が$L^1(Omega times bb(T)^N)$なら定義できるからと言って、そのようにすると広げすぎであり、成り立たない反例もある
+しかしながら、@e_tsconv_p の右辺が$L^1(Omega times TT^N)$なら定義できるからと言って、そのようにすると広げすぎであり、成り立たない反例もある
 （@r_a92 のProposition 5.8参照）。
-そのためどこまで拡張するかが問題になるが、今後の展開で重要なのが$L^1(Omega; C(bb(T)^N))$という空間である。
-これは$x in Omega$ごとに$y$について$bb(Z)^N$-周期的な連続関数が対応し、
+そのためどこまで拡張するかが問題になるが、今後の展開で重要なのが$L^1(Omega; C(TT^N))$という空間である。
+これは$x in Omega$ごとに$y$について$ZZ^N$-周期的な連続関数が対応し、
 $
-norm(f)_(L^1(Omega; C(bb(T)^N)))
+norm(f)_(L^1(Omega; C(TT^N)))
 := integral_Omega sup_(y in square) abs(f(x, y)) dd(x)
 < oo
 $ <e_l1c>
 を満たす関数$f$のなすボホナー空間である。
 
 #theorem("二スケール収束の基本定理")[
-$f in L^1(Omega; C(bb(T)^N))$とすると、$norm(f(x, x/epsilon))_(L^1(Omega)) <= norm(f)_(L^1(Omega; C(bb(T)^N)))$と@e_tsconv_p が成り立つ。
+$f in L^1(Omega; C(TT^N))$とすると、$norm(f(x, x/epsilon))_(L^1(Omega)) <= norm(f)_(L^1(Omega; C(TT^N)))$と@e_tsconv_p が成り立つ。
 ] <t_tsconv_p>
 
-証明の前に$L^1(Omega; C(bb(T)^N))$の関数の特徴づけを思い出す。
+証明の前に$L^1(Omega; C(TT^N))$の関数の特徴づけを思い出す。
 
 #proposition[
-関数$f$が$L^1(Omega; C(bb(T)^N))$に属することは、$Omega$のある測度零部分集合$E$が存在して以下の条件が成り立つことと同値である。
-- 任意の$x in Omega\\E$に対して$y |-> f(x, y)$は連続で$bb(Z)^N$-周期的である。
+関数$f$が$L^1(Omega; C(TT^N))$に属することは、$Omega$のある測度零部分集合$E$が存在して以下の条件が成り立つことと同値である。
+- 任意の$x in Omega\\E$に対して$y |-> f(x, y)$は連続で$ZZ^N$-周期的である。
 - 任意の$y in square$に対して$x |-> f(x, y)$は可測である。
 - @e_l1c が成り立つ。
 ]
@@ -207,10 +207,10 @@ $
 lim_(epsilon -> 0) integral_Omega phi(x)g(x/epsilon) dd(x)
 = integral_Omega phi(x)lr(angle.l g angle.r) dd(x)
 $ <e_tsconv_p_sep>
-とでき、$bb(Z)^N$-周期的な関数$g$に対して$L^oo (bb(R)^N)$関数の列$g(x/epsilon)$が$epsilon -> 0$で平均$lr(angle.l g angle.r)$に汎弱収束することを意味する。
+とでき、$ZZ^N$-周期的な関数$g$に対して$L^oo (RR^N)$関数の列$g(x/epsilon)$が$epsilon -> 0$で平均$lr(angle.l g angle.r)$に汎弱収束することを意味する。
 この式も近似することを考えると$phi$,
 $g$を区間の直積の指示関数の場合に示せばよく、次の1次元の場合に帰着される。
-つまり、$L^oo (bb(T))$関数$g$と実数$a < b$に対して、
+つまり、$L^oo (TT)$関数$g$と実数$a < b$に対して、
 $
 lim_(epsilon -> 0) integral_a^b g(x/epsilon) dd(x)
 = (b-a) integral_0^1 g(y) dd(y).
@@ -237,9 +237,9 @@ $
 $
 &abs(integral_Omega f(x, x/epsilon) dd(x)-integral_Omega lr(angle.l f(x, y) angle.r)_y dd(x)) \
 &quad <= integral_Omega abs(f(x, x/epsilon)-f_n (x, x/epsilon)) dd(x)+integral_Omega abs(f_n (x, x/epsilon)-lr(angle.l f_n (x, y) angle.r)_y) dd(x)+integral_Omega abs(lr(angle.l f_n (x, y) angle.r)_y-lr(angle.l f (x, y) angle.r)_y) dd(x) \
-&quad <= 2 norm(f_n-f)_(L^1(Omega; C(bb(T)^N)))+integral_Omega abs(f_n (x, x/epsilon)-lr(angle.l f_n (x, y) angle.r)_y) dd(x)
+&quad <= 2 norm(f_n-f)_(L^1(Omega; C(TT^N)))+integral_Omega abs(f_n (x, x/epsilon)-lr(angle.l f_n (x, y) angle.r)_y) dd(x)
 $
-なので、$f_n$が$f$に$L^1(Omega; C(bb(T)^N))$で強収束を示せばよい。
+なので、$f_n$が$f$に$L^1(Omega; C(TT^N))$で強収束を示せばよい。
 ここで$g_n (x) = sup_(y in square) abs(f_n (x, y)-f(x, y))$とおくと、$x in Omega\\E$に対して$y |-> f(x, y)$は連続で一様連続でもあるので、分割を細かくするほど$g_n (x) -> 0$となる。
 すなわちほとんどすべての点で$g_n -> 0$である。
 また、$x in Omega\\E$ごとに
@@ -249,28 +249,28 @@ g_n (x)
 <= 2 sup_(y in square) abs(f(x, y))
 $
 であり最右辺は$L^1(Omega)$に属する関数である。
-よって、ルベーグの優収束定理が使えて、$norm(f_n-f)_(L^1(Omega; C(bb(T)^N))) -> 0$なので、@e_tsconv_p が示された。
+よって、ルベーグの優収束定理が使えて、$norm(f_n-f)_(L^1(Omega; C(TT^N))) -> 0$なので、@e_tsconv_p が示された。
 ]
 
 証明の途中で示した変数分離での二スケール収束の基本公式は関数の仮定が異なるからその部分を以下に述べる。
 
 #theorem([二スケール収束の基本定理（変数分離）])[
-$f(x, y) = phi(x)g(y)$, $phi in L^1(Omega)$, $g in L^oo (bb(T)^N)$とすると、
+$f(x, y) = phi(x)g(y)$, $phi in L^1(Omega)$, $g in L^oo (TT^N)$とすると、
 @e_tsconv_p が成り立つ。
 ] <t_tsconv_p_sep>
 
 == 二スケール収束とその性質
 
-$Omega$を$bb(R)^N$の（有界とは限らない）ボレル可測集合とする。
+$Omega$を$RR^N$の（有界とは限らない）ボレル可測集合とする。
 
 #definition([二スケール収束])[
 $L^2(Omega)$の関数列$u_epsilon (x)$を考える。
 
-ここである$L^2(Omega times bb(T)^N)$関数$u$が存在して、
+ここである$L^2(Omega times TT^N)$関数$u$が存在して、
 $
 integral_Omega u_epsilon(x)phi(x, x/epsilon) dd(x)
 -> integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)
-quad forall phi in L^2(Omega; C(bb(T)^N))
+quad forall phi in L^2(Omega; C(TT^N))
 $
 が成り立つとき、$u_epsilon (x)$は_二スケール弱収束_するといい、その時の$u(x, y)$を_二スケール極限_という。
 
@@ -287,8 +287,8 @@ $
 ]
 
 #example[
-$u in L^2(Omega; C(bb(T)^N))$とするとき、$u(x, x/epsilon)$は$u(x, y)$に二スケール強収束する。
-$phi in L^2(Omega; C(bb(T)^N))$に対して、$u(x, y)phi(x, y)$は$L^1(Omega; C(bb(T)^N))$関数なので、
+$u in L^2(Omega; C(TT^N))$とするとき、$u(x, x/epsilon)$は$u(x, y)$に二スケール強収束する。
+$phi in L^2(Omega; C(TT^N))$に対して、$u(x, y)phi(x, y)$は$L^1(Omega; C(TT^N))$関数なので、
 二スケール収束の基本定理より
 $
 integral_Omega u(x, x/epsilon)phi(x, x/epsilon) dd(x)
@@ -308,22 +308,22 @@ $L^2(Omega)$の関数列$u_epsilon (x)$が$macron(u)(x)$に強収束するなら
 ]
 
 #proof[
-$phi in L^2(Omega; C(bb(T)^N))$に対して、
+$phi in L^2(Omega; C(TT^N))$に対して、
 $
 &abs(integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)-integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)) \
 &quad <= integral_Omega abs(u_epsilon (x)phi(x, x/epsilon)-macron(u)(x)phi(x, x/epsilon)) dd(x)+integral_Omega abs(macron(u)(x)phi(x, x/epsilon)-lr(angle.l macron(u)(x)phi(x, y) angle.r)_y) dd(x) \
 &quad <= norm(u_epsilon-u)_(L^2(Omega))norm(phi(x, x/epsilon))_(L^2(Omega))+integral_Omega abs(macron(u)(x)phi(x, x/epsilon)-lr(angle.l macron(u)(x)phi(x, y) angle.r)_y) dd(x)
 $
-ここで前半は$norm(phi(x, x/epsilon))_(L^2(Omega)) <= norm(phi)_(L^2(Omega; C(bb(T)^N))) < oo$より仮定から$0$に収束し、後半も二スケール収束の基本定理より$0$に収束する。
+ここで前半は$norm(phi(x, x/epsilon))_(L^2(Omega)) <= norm(phi)_(L^2(Omega; C(TT^N))) < oo$より仮定から$0$に収束し、後半も二スケール収束の基本定理より$0$に収束する。
 したがって、二スケール弱収束が言えて、二スケール強収束は通常の強収束からノルムが収束する$norm(u_epsilon)_(L^2(Omega)) -> norm(macron(u))_(L^2(Omega))$ことからわかる。
 ]
 
 #proposition[
-$L^2(Omega)$の関数列$u_epsilon (x)$が$u(x, y) in L^2(Omega times bb(T)^N)$に二スケール弱収束するならば、$u_epsilon (x)$は$macron(u)(x) = lr(angle.l u(x, y) angle.r)_y$に弱収束する。
+$L^2(Omega)$の関数列$u_epsilon (x)$が$u(x, y) in L^2(Omega times TT^N)$に二スケール弱収束するならば、$u_epsilon (x)$は$macron(u)(x) = lr(angle.l u(x, y) angle.r)_y$に弱収束する。
 ]
 
 #proof[
-$phi in L^2(Omega)$に対して、$phi in L^2(Omega; C(bb(T)^N))$とみなせるので、
+$phi in L^2(Omega)$に対して、$phi in L^2(Omega; C(TT^N))$とみなせるので、
 $
 integral_Omega u_epsilon (x)phi(x) dd(x)
 -> integral_Omega lr(angle.l u(x, y)phi(x) angle.r)_y dd(x)
@@ -333,7 +333,7 @@ $
 ]
 
 #proposition[
-$L^2(Omega)$の関数列$u_epsilon (x)$が$u(x, y) in L^2(Omega times bb(T)^N)$に二スケール弱収束し$L^2(Omega)$の関数列$v_epsilon (x)$が$v(x, y) in L^2(Omega times bb(T)^N)$に二スケール強収束するとき、
+$L^2(Omega)$の関数列$u_epsilon (x)$が$u(x, y) in L^2(Omega times TT^N)$に二スケール弱収束し$L^2(Omega)$の関数列$v_epsilon (x)$が$v(x, y) in L^2(Omega times TT^N)$に二スケール強収束するとき、
 $
 integral_Omega u_epsilon (x)v_epsilon (x) dd(x)
 -> integral_Omega lr(angle.l u(x, y)v(x, y) angle.r)_y dd(x)
@@ -364,35 +364,35 @@ $
 それの二スケール弱収束版が次に示すこの節で最も重要な定理である。
 
 #theorem[
-$L^2(Omega)$の有界な関数列$u_epsilon (x)$に対して、必要なら部分列を取れば$u_epsilon (x)$はある$u(x, y) in L^2(Omega times bb(T)^N)$に二スケール弱収束する。
+$L^2(Omega)$の有界な関数列$u_epsilon (x)$に対して、必要なら部分列を取れば$u_epsilon (x)$はある$u(x, y) in L^2(Omega times TT^N)$に二スケール弱収束する。
 ]
 
 #remark[
 上で示した通り二スケール弱収束の方が通常の弱収束より強い収束の概念なので、この定理は弱収束に対するものより強い内容になっている。
-また、$u(x, y)$は$L^2(Omega; C(bb(T)^N))$に属するとまでは言っていないことに注意する。
+また、$u(x, y)$は$L^2(Omega; C(TT^N))$に属するとまでは言っていないことに注意する。
 ]
 
 #proof[
-$C := sup_epsilon norm(u_epsilon)_(L^2(Omega)) < oo$とおくと、任意の$phi in L^2(Omega; C(bb(T)^N))$に対して、
+$C := sup_epsilon norm(u_epsilon)_(L^2(Omega)) < oo$とおくと、任意の$phi in L^2(Omega; C(TT^N))$に対して、
 $
 abs(integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x))
 <= norm(u_epsilon)_(L^2(Omega))norm(phi(x, x/epsilon))_(L^2(Omega))
 <= C norm(phi(x, x/epsilon))_(L^2(Omega))
-<= C norm(phi)_(L^2(Omega; C(bb(T)^N))).
+<= C norm(phi)_(L^2(Omega; C(TT^N))).
 $ <e_bddcpt_tsw>
-このことは$epsilon$ごとに$L^2 (Omega ; C (bb(T)^N))$上の有界線形形式を与え双対空間の元$U_epsilon in L^2(Omega; C(bb(T)^N))^*$が対応し
+このことは$epsilon$ごとに$L^2 (Omega ; C (TT^N))$上の有界線形形式を与え双対空間の元$U_epsilon in L^2(Omega; C(TT^N))^*$が対応し
 $
 lr(angle.l U_epsilon, phi angle.r)
 = integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
-quad forall phi in L^2(Omega; C(bb(T)^N))
+quad forall phi in L^2(Omega; C(TT^N))
 $
 となり、さらに$norm(U_epsilon) <= C$であることを表す（ここでの$lr(angle.l U_epsilon, phi angle.r)$は平均ではなく線形形式の値）。
-ここで、$L^2(Omega; C(bb(T)^N))$は可分なバナッハ空間なので、バナッハ・アラオグルの定理より$U_epsilon$は必要なら部分列を取ればある$U in L^2(Omega; C(bb(T)^N))^*$に汎弱収束する、つまり
+ここで、$L^2(Omega; C(TT^N))$は可分なバナッハ空間なので、バナッハ・アラオグルの定理より$U_epsilon$は必要なら部分列を取ればある$U in L^2(Omega; C(TT^N))^*$に汎弱収束する、つまり
 $
 lr(angle.l U_epsilon, phi angle.r)
 = integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
 -> lr(angle.l U, phi angle.r)
-quad forall phi in L^2(Omega; C(bb(T)^N))
+quad forall phi in L^2(Omega; C(TT^N))
 $
 である。
 ここで@e_bddcpt_tsw の評価を二つ目の不等号で止めた
@@ -403,43 +403,43 @@ $
 を考えると、$epsilon$についての極限を取り二スケール収束の基本定理から
 $
 abs(lr(angle.l U, phi angle.r))
-<= C norm(phi)_(L^2(Omega times bb(T)^N))
-quad forall phi in L^2(Omega; C(bb(T)^N))
+<= C norm(phi)_(L^2(Omega times TT^N))
+quad forall phi in L^2(Omega; C(TT^N))
 $
-ここで$L^2(Omega; C(bb(T)^N))$は$L^2(Omega times bb(T)^N)$の稠密な部分集合であることに注意すると、
-リースの表現定理より$u = u(x, y) in L^2(Omega times bb(T)^N)$が存在して
+ここで$L^2(Omega; C(TT^N))$は$L^2(Omega times TT^N)$の稠密な部分集合であることに注意すると、
+リースの表現定理より$u = u(x, y) in L^2(Omega times TT^N)$が存在して
 $
 lr(angle.l U_epsilon, phi angle.r)
 = integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
 -> lr(angle.l U, phi angle.r)
 = integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)
-quad forall phi in L^2(Omega; C(bb(T)^N))
+quad forall phi in L^2(Omega; C(TT^N))
 $
 を得る。
 ]
 
 この節の最後に微分についての二スケール収束の結果を紹介する。
-ここからは$Omega$を$bb(R)^N$の有界領域とする。
+ここからは$Omega$を$RR^N$の有界領域とする。
 
 #theorem[
 $H_0^1(Omega)$の有界な関数列$u_epsilon (x)$がある関数$u(x) in H_0^1(Omega)$に弱収束しているとする。
-このとき、$v(x, y) in L^2(Omega; H^1(bb(T)^N))$が存在して必要なら部分列を取れば$nabla u_epsilon (x)$は$nabla u(x)+nabla_y v(x, y)$に二スケール弱収束する。
+このとき、$v(x, y) in L^2(Omega; H^1(TT^N))$が存在して必要なら部分列を取れば$nabla u_epsilon (x)$は$nabla u(x)+nabla_y v(x, y)$に二スケール弱収束する。
 ]
 
 #proof[
-$u_epsilon$と$nabla u_epsilon$（の各成分）は$L^2(Omega)$で有界なので、必要なら部分列を取れば二スケール弱収束する、つまり$tilde(u)(x, y) in L^2(Omega times bb(T)^N)$と$p(x, y) in L^2(Omega times bb(T)^N)^N$が存在して、
+$u_epsilon$と$nabla u_epsilon$（の各成分）は$L^2(Omega)$で有界なので、必要なら部分列を取れば二スケール弱収束する、つまり$tilde(u)(x, y) in L^2(Omega times TT^N)$と$p(x, y) in L^2(Omega times TT^N)^N$が存在して、
 $
 integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
 -> integral_Omega lr(angle.l tilde(u)(x, y)phi(x, y) angle.r)_y dd(x)
-quad forall phi in L^2(Omega; C(bb(T)^N)),
+quad forall phi in L^2(Omega; C(TT^N)),
 $
 $
 integral_Omega nabla u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
 -> integral_Omega lr(angle.l p(x, y)Phi(x, y) angle.r)_y dd(x)
-quad forall Phi in L^2(Omega; C(bb(T)^N))^N
+quad forall Phi in L^2(Omega; C(TT^N))^N
 $
 が成り立つ。
-ここでコンパクトな台をもつ滑らかな関数の集合$cal(D)(Omega times bb(T)^N)$が$L^2(Omega; C(bb(T)^N))$で稠密であることに注意して、部分積分をすると
+ここでコンパクトな台をもつ滑らかな関数の集合$cal(D)(Omega times TT^N)$が$L^2(Omega; C(TT^N))$で稠密であることに注意して、部分積分をすると
 $
 integral_Omega nabla u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
 &= -integral_Omega u_epsilon (x) (div_x Phi(x, x/epsilon)+1/epsilon div_y Phi(x, x/epsilon)) dd(x) \
@@ -462,12 +462,12 @@ $
 = -integral_Omega lr(angle.l u(x)div_x Phi(x, x/epsilon) angle.r)_y dd(x)
 = integral_Omega lr(angle.l nabla u(x) dot Phi(x, x/epsilon) angle.r)_y dd(x)
 $
-なので、$div_y Phi(x, y) = 0$だったことから$v(x, y) in L^2(Omega; H^1(bb(T)^N))$が存在して$p(x, y) = nabla u(x)+nabla_y v(x, y)$を得る。
+なので、$div_y Phi(x, y) = 0$だったことから$v(x, y) in L^2(Omega; H^1(TT^N))$が存在して$p(x, y) = nabla u(x)+nabla_y v(x, y)$を得る。
 ]
 
 == 均質化への応用
 
-$Omega$を$bb(R)^N$の有界領域として、熱方程式の定常問題
+$Omega$を$RR^N$の有界領域として、熱方程式の定常問題
 $
 cases(
 	-div(A(x, x/epsilon)nabla u_epsilon (x)) = f(x) "in" Omega"," ,
@@ -475,10 +475,10 @@ cases(
 )
 $ <e_e_eq>
 を考える。
-ここで$A(x, y)$は各成分が$L^oo (Omega; C(bb(T)^N))$な$N$次正方行列として$alpha > 0$が存在して一様楕円性条件
+ここで$A(x, y)$は各成分が$L^oo (Omega; C(TT^N))$な$N$次正方行列として$alpha > 0$が存在して一様楕円性条件
 $
 A(x, y)xi dot xi >= alpha abs(xi)^2
-quad forall x in Omega, y in bb(T)^N, xi in bb(R)^N
+quad forall x in Omega, y in TT^N, xi in RR^N
 $
 を満たすとする。
 $f(x) in L^2(Omega)$とする。
@@ -493,7 +493,7 @@ $ <e_e_eqw>
 $
 cases(
 	-div_x (lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) angle.r)) = f(x) "in" Omega"," ,
-	-div_y (A(x, y)(nabla u(x)+nabla_y v(x, y))) = 0 "in" Omega times bb(T)^N"," ,
+	-div_y (A(x, y)(nabla u(x)+nabla_y v(x, y))) = 0 "in" Omega times TT^N"," ,
 	u = 0 "on" partial Omega,
 )
 $ <e_lim_eq>
@@ -501,9 +501,9 @@ $ <e_lim_eq>
 $
 integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y))dot(nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x) &\
-forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(bb(T)^N)) &
+forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
 $ <e_lim_eqw>
-の意味で一意解$u in H_0^1(Omega)$と$v in L^2(Omega; H^1(bb(T)^N))$を持つ。
+の意味で一意解$u in H_0^1(Omega)$と$v in L^2(Omega; H^1(TT^N))$を持つ。
 
 #theorem[
 $epsilon -> 0$で$u_epsilon (x)$は$u(x)$に$H_0^1(Omega)$弱収束し、$nabla u_epsilon (x)$は$nabla u(x)+nabla_y v(x , y)$に二スケール弱収束する。
@@ -513,7 +513,7 @@ $epsilon -> 0$で$u_epsilon (x)$は$u(x)$に$H_0^1(Omega)$弱収束し、$nabla 
 前節の定理より部分列を取れば$u$と$v$が存在して$u_epsilon (x)$は$u(x)$に$H_0^1(Omega)$弱収束し$nabla u_epsilon (x)$は$nabla u(x)+nabla_y v(x, y)$に二スケール弱収束する。
 あとはこの$u, v$が二スケール均質化方程式系の解になっていることを示せば、解の一意性より結論が従う。
 
-滑らかな試験関数$phi(x) in H_0^1(Omega)$と$psi in L^2(Omega; H^1(bb(T)^N))$を固定して、@e_e_eqw の$phi$として$phi_epsilon (x) = phi(x)+epsilon psi(x, x/epsilon)$を代入すると
+滑らかな試験関数$phi(x) in H_0^1(Omega)$と$psi in L^2(Omega; H^1(TT^N))$を固定して、@e_e_eqw の$phi$として$phi_epsilon (x) = phi(x)+epsilon psi(x, x/epsilon)$を代入すると
 $
 integral_Omega A(x, x/epsilon)nabla u_epsilon (x) dot nabla phi_epsilon (x) dd(x)
 = integral_Omega f(x) phi_epsilon (x) dd(x)
@@ -523,7 +523,7 @@ $
 integral_Omega A(x, x/epsilon)nabla u_epsilon (x) dot (nabla phi(x)+epsilon nabla_x psi(x, x/epsilon)+nabla_y psi(x, x/epsilon)) dd(x)
 = integral_Omega f(x) (phi(x)+epsilon psi(x, x/epsilon)) dd(x)
 $ <e_e_phie>
-ここで$A^t (x, y)(nabla phi(x)+nabla_y psi(x, y))$は$L^2(Omega; C(bb(T)^N))^N$に属するので、$A^t (x, x/epsilon)(nabla phi(x)+epsilon nabla_x psi(x, x/epsilon)+nabla_y psi(x, x/epsilon))$はそれに二スケール強収束する。
+ここで$A^t (x, y)(nabla phi(x)+nabla_y psi(x, y))$は$L^2(Omega; C(TT^N))^N$に属するので、$A^t (x, x/epsilon)(nabla phi(x)+epsilon nabla_x psi(x, x/epsilon)+nabla_y psi(x, x/epsilon))$はそれに二スケール強収束する。
 よって、@e_e_phie で$epsilon -> 0$とすると、
 $
 integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y))dot(nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
@@ -535,7 +535,7 @@ $
 さらに、もし二スケール均質化方程式系の解の規則性が上がるとよりよい収束性が言える。
 
 #theorem[
-もし$v(x, y)$と$nabla_x v(x, y)$（の各成分）と$nabla_y v(x, y)$（の各成分）が$L^2(Omega; C(bb(T)^N))$に属するならば、
+もし$v(x, y)$と$nabla_x v(x, y)$（の各成分）と$nabla_y v(x, y)$（の各成分）が$L^2(Omega; C(TT^N))$に属するならば、
 $u_epsilon (x)-u(x)-epsilon v(x, x/epsilon)$は$0$に$H^1(Omega)$強収束する。
 ]
 
@@ -667,7 +667,7 @@ lim_(n -> oo) integral_0^oo e^(-x)(n x-floor(n x))
 $
 を考える。
 この問題では関数$g(y) = y-floor(y)$は$y$について周期$1$の関数であるが連続ではない。
-しかしながら$L^oo (bb(T))$なので定理@t_tsconv_p_sep が使えて、
+しかしながら$L^oo (TT)$なので定理@t_tsconv_p_sep が使えて、
 $
 lim_(n -> oo) integral_0^oo e^(-x)(n x-floor(n x))
 = integral_0^oo e^(-x) dd(x) integral_0^1 y dd(y)
