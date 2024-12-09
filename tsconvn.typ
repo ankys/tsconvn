@@ -268,7 +268,7 @@ $L^2(Omega)$の関数列$u_epsilon (x)$を考える。
 
 ここである$L^2(Omega times TT^N)$関数$u$が存在して、
 $
-integral_Omega u_epsilon(x)phi(x, x/epsilon) dd(x)
+integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
 -> integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)
 quad forall phi in L^2(Omega; C(TT^N))
 $
@@ -276,7 +276,7 @@ $
 
 上の条件に加えて
 $
-integral_Omega u_epsilon(x)^2 dd(x)
+integral_Omega u_epsilon (x)^2 dd(x)
 -> integral_Omega lr(angle.l u(x, y)^2 angle.r)_y dd(x)
 $
 が成立するとき、$u_epsilon (x)$は_二スケール強収束_するという。
@@ -492,14 +492,14 @@ $ <e_e_eqw>
 また、極限方程式（二スケール均質化方程式系）は
 $
 cases(
-	-div_x (lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) angle.r)) = f(x) "in" Omega"," ,
+	-div_x (lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) angle.r)_y) = f(x) "in" Omega"," ,
 	-div_y (A(x, y)(nabla u(x)+nabla_y v(x, y))) = 0 "in" Omega times TT^N"," ,
 	u = 0 "on" partial Omega,
 )
 $ <e_lim_eq>
 で弱形式
 $
-integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y))dot(nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) dot (nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x) &\
 forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
 $ <e_lim_eqw>
@@ -526,7 +526,7 @@ $ <e_e_phie>
 ここで$A^t (x, y)(nabla phi(x)+nabla_y psi(x, y))$は$L^2(Omega; C(TT^N))^N$に属するので、$A^t (x, x/epsilon)(nabla phi(x)+epsilon nabla_x psi(x, x/epsilon)+nabla_y psi(x, x/epsilon))$はそれに二スケール強収束する。
 よって、@e_e_phie で$epsilon -> 0$とすると、
 $
-integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y))dot(nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) dot (nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x)
 $
 つまり@e_lim_eqw を得る。
@@ -557,12 +557,12 @@ $
 &limsup_(epsilon -> 0) alpha norm(nabla(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon)))_(L^2(Omega))^2 \
 &quad <= integral_Omega f(x)u(x) dd(x)-integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) dot (nabla u(x)+nabla_y v(x, y)) angle.r)_y dd(x)
 $
-となり、二スケール均質化方程式系の弱形式@e_lim_eqw で$(phi, psi) = (u, v)$とすることで、右辺は$0$であることがわかるので定理の証明が完成する。
+となり、二スケール均質化方程式系の弱形式（@e_lim_eqw）で$(phi, psi) = (u, v)$とすることで、右辺は$0$であることがわかるので定理の証明が完成する。
 ]
 
 == 種々の積分の計算
 
-この節では二スケール収束の基本定理@e_tsconv_p を用いることで積分の極限に関する問題が簡単に解かれることを大学や大学院の入試問題を題材に紹介する。
+この節では二スケール収束の基本公式（@e_tsconv_p）を用いることで積分の極限に関する問題が簡単に解かれることを大学や大学院の入試問題を題材に紹介する。
 
 #example[
 1989年の東京工業大学の入試問題
@@ -574,9 +574,9 @@ $
 二スケール収束の基本定理（@t_tsconv_p）が使えたとしたら、$g(y) = abs(sin y)$の周期は$pi$より、以下のように簡単に計算することができる。
 $
 lim_(n -> oo) integral_0^pi x^2 abs(sin n x) dd(x)
-= integral_0^pi 1/pi integral_0^pi x^2 abs(sin y) dd(y) dd(x)
-= 1/pi integral_0^pi x^2 dd(x) integral_0^pi sin y dd(y)
-= 1/pi dot 1/3 pi^3 dot [-cos y]_0^pi
+&= integral_0^pi 1/pi integral_0^pi x^2 abs(sin y) dd(y) dd(x)
+= 1/pi integral_0^pi x^2 dd(x) integral_0^pi sin y dd(y) \
+&= 1/pi dot 1/3 pi^3 dot [-cos y]_0^pi
 = 2/3 pi^2
 $
 ]
