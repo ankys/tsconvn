@@ -28,3 +28,13 @@ r_n89:
     issue: 3
   page-range: 608-623
   date: 1989
+r_a12:
+  type: Chapter
+  author: Allaire, Grégoire
+  title: A brief introduction to homogenization and miscellaneous applications
+  parent:
+    title: Mathematical and numerical approaches for multiscale problem
+    # %S ESAIM Proc.
+    # %V 37
+  page-range: 1-49
+  date: 2012
