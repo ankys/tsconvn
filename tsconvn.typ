@@ -1,7 +1,7 @@
 
-#let title = "二スケール収束とその周辺"
+#let title = [二スケール収束とその周辺]
 #let author = "中安淳"
-#let date = datetime.today().display("[year]年[month]月[day]日")
+#let date = datetime.today().display()
 
 #import "@preview/rubber-article:0.1.0": *
 #show: article.with(lang: "ja")
