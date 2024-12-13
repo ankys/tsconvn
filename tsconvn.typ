@@ -6,6 +6,11 @@
 #import "@preview/rubber-article:0.1.0": *
 #show: article.with(lang: "ja")
 // #set text(font: ("YuMincho", "Zen Old Mincho", "Zen Kaku Gothic New"))
+#set par(first-line-indent: 1em)
+#show heading: it => {
+	it
+	par(text(size: 0pt, ""))
+}
 
 #import "@preview/physica:0.9.3": dv, dd
 #import "@preview/ctheorems:1.1.3": thmrules, thmplain, thmbox, thmproof
@@ -569,7 +574,7 @@ integral_Omega lr(angle.l A(y)(gradient u(x)+gradient_y v(x, y)) dot (gradient p
 forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
 $
 である。
-ここで、特殊な$f$を取ることで解$u$の勾配が定数ベクトル$xi$になったとして、その時の解を$u_xi(x), v_xi(x, y)$とおくと、
+ここで、特殊な$f$を取ることで解$u$の勾配が定数ベクトル$xi$になったとして、その時の解を$u_xi (x), v_xi (x, y)$とおくと、
 $
 integral_Omega lr(angle.l A(y)(xi+gradient_y v_xi (x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x) &\
