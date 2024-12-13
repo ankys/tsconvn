@@ -656,6 +656,24 @@ $
 となる。
 ]
 
+以降では$A$は$y$変数のみに依存し、さらに$A(y)$は対称行列とする。
+この時、$macron(A)$も対称行列となり、次の式によって特徴づけられる。
+$
+macron(A)xi dot xi = lr(angle.l A(y)(xi+gradient_y v_xi (y)) dot (xi+gradient_y v_xi (y)) angle.r)_y
+quad xi in RR^N.
+$
+ただし、$v_xi$はセル問題の解である。
+ここで、$v_xi$はエネルギー
+$
+E_xi [v] = 1/2 lr(angle.l A(y)(xi+gradient_y v(y)) dot (xi+gradient_y v(y)) angle.r)_y
+quad v in H^1(TT^N)
+$
+の最小限としても特徴づけられることに注意する。
+そのため、$macron(A)$は次の変分公式を満たす。
+$
+macron(A)xi dot xi = min_(v in H^1(TT^N)) lr(angle.l A(y)(xi+gradient_y v(y)) dot (xi+gradient_y v(y)) angle.r)_y.
+$
+
 == 種々の積分の計算
 
 この節では二スケール収束の基本公式（@e_tsconv_p）を用いることで積分の極限に関する問題が簡単に解かれることを大学や大学院の入試問題を題材に紹介する。
