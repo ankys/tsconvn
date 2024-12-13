@@ -674,6 +674,41 @@ $
 macron(A)xi dot xi = min_(v in H^1(TT^N)) lr(angle.l A(y)(xi+gradient_y v(y)) dot (xi+gradient_y v(y)) angle.r)_y.
 $
 
+ここから$v equiv 0$を考えることで、直ちに上からの評価
+$
+macron(A)xi dot xi <= lr(angle.l A(y)xi dot xi angle.r)_y
+$
+を得る。
+
+下からの評価は次のようにして得られる。
+まず、勾配の部分を$p(y)$とおき、それが自由に動いた方が関数空間は広がるので、
+$
+macron(A)xi dot xi = min_(p in L^2(TT^N)^N, lr(angle.l p angle.r) = 0) lr(angle.l A(y)(xi+p(y)) dot (xi+p(y)) angle.r)_y.
+$
+この最小化問題はラグランジュの未定乗数法を使って解くことができ、
+$
+2 A(y)(xi+p(y)) = lambda,
+quad lr(angle.l p angle.r) = 0.
+$
+よって、
+$
+lambda = 2 lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi
+$
+となり、
+$
+macron(A)xi dot xi
+>= 1/4 lr(angle.l lambda dot A(y)^(-1) lambda angle.r)_y
+= lr(angle.l lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi dot A(y)^(-1) lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi angle.r)_y
+= lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi dot xi
+$
+を得る。
+
+以上をまとめると均質化拡散係数$macron(A)$は
+$
+lr(angle.l A(y)^(-1) angle.r)_y^(-1) <= macron(A) <= lr(angle.l A(y) angle.r)_y
+$
+を満たす。
+
 == 種々の積分の計算
 
 この節では二スケール収束の基本公式（@e_tsconv_p）を用いることで積分の極限に関する問題が簡単に解かれることを大学や大学院の入試問題を題材に紹介する。
