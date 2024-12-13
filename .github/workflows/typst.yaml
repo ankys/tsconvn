@@ -1,0 +1,26 @@
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v4
+      # Compile main.typ
+      - name: Compile Typst File
+        uses: lvignoli/typst-action@main
+        with:
+          source_file: main.typ
+      # Create Release
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          name: ${{github.repository}}-${{github.ref_name}}.pdf
+          files: main.pdf

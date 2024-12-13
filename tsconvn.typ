@@ -1,7 +1,8 @@
 
 #let title = [二スケール収束とその周辺]
 #let author = "中安淳"
-#let date = datetime.today().display()
+// #let date = datetime.today().display()
+#let date = [2024年12月13日]
 
 #import "@preview/rubber-article:0.1.0": *
 #show: article.with(lang: "ja")
