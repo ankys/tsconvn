@@ -423,25 +423,25 @@ $
 
 #theorem[
 $H_0^1(Omega)$の有界な関数列$u_epsilon (x)$がある関数$u(x) in H_0^1(Omega)$に弱収束しているとする。
-このとき、$v(x, y) in L^2(Omega; H^1(TT^N))$が存在して必要なら部分列を取れば$nabla u_epsilon (x)$は$nabla u(x)+nabla_y v(x, y)$に二スケール弱収束する。
+このとき、$v(x, y) in L^2(Omega; H^1(TT^N))$が存在して必要なら部分列を取れば$gradient u_epsilon (x)$は$gradient u(x)+gradient_y v(x, y)$に二スケール弱収束する。
 ]
 
 #proof[
-$u_epsilon$と$nabla u_epsilon$（の各成分）は$L^2(Omega)$で有界なので、必要なら部分列を取れば二スケール弱収束する、つまり$tilde(u)(x, y) in L^2(Omega times TT^N)$と$p(x, y) in L^2(Omega times TT^N)^N$が存在して、
+$u_epsilon$と$gradient u_epsilon$（の各成分）は$L^2(Omega)$で有界なので、必要なら部分列を取れば二スケール弱収束する、つまり$tilde(u)(x, y) in L^2(Omega times TT^N)$と$p(x, y) in L^2(Omega times TT^N)^N$が存在して、
 $
 integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
 -> integral_Omega lr(angle.l tilde(u)(x, y)phi(x, y) angle.r)_y dd(x)
 quad forall phi in L^2(Omega; C(TT^N)),
 $
 $
-integral_Omega nabla u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
+integral_Omega gradient u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
 -> integral_Omega lr(angle.l p(x, y)Phi(x, y) angle.r)_y dd(x)
 quad forall Phi in L^2(Omega; C(TT^N))^N
 $
 が成り立つ。
 ここでコンパクトな台をもつ滑らかな関数の集合$cal(D)(Omega times TT^N)$が$L^2(Omega; C(TT^N))$で稠密であることに注意して、部分積分をすると
 $
-integral_Omega nabla u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
+integral_Omega gradient u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
 &= -integral_Omega u_epsilon (x) (div_x Phi(x, x/epsilon)+1/epsilon div_y Phi(x, x/epsilon)) dd(x) \
 &= -integral_Omega u_epsilon (x)div_x Phi(x, x/epsilon) dd(x)-1/epsilon integral_Omega u_epsilon (x)div_y Phi(x, x/epsilon) dd(x)
 $
@@ -460,9 +460,9 @@ $
 $
 -integral_Omega lr(angle.l tilde(u)(x, y)div_x Phi(x, x/epsilon) angle.r)_y dd(x)
 = -integral_Omega lr(angle.l u(x)div_x Phi(x, x/epsilon) angle.r)_y dd(x)
-= integral_Omega lr(angle.l nabla u(x) dot Phi(x, x/epsilon) angle.r)_y dd(x)
+= integral_Omega lr(angle.l gradient u(x) dot Phi(x, x/epsilon) angle.r)_y dd(x)
 $
-なので、$div_y Phi(x, y) = 0$だったことから$v(x, y) in L^2(Omega; H^1(TT^N))$が存在して$p(x, y) = nabla u(x)+nabla_y v(x, y)$を得る。
+なので、$div_y Phi(x, y) = 0$だったことから$v(x, y) in L^2(Omega; H^1(TT^N))$が存在して$p(x, y) = gradient u(x)+gradient_y v(x, y)$を得る。
 ]
 
 == 均質化への応用
@@ -470,7 +470,7 @@ $
 $Omega$を$RR^N$の有界領域として、拡散方程式の定常問題
 $
 cases(
-	-div(A(x, x/epsilon)nabla u_epsilon (x)) = f(x) "in" Omega"," ,
+	-div(A(x, x/epsilon)gradient u_epsilon (x)) = f(x) "in" Omega"," ,
 	u_epsilon = 0 "on" partial Omega,
 )
 $ <e_e_eq>
@@ -484,7 +484,7 @@ $
 $f(x) in L^2(Omega)$とする。
 このとき、序文に書いたような議論で方程式@e_e_eq は弱形式
 $
-integral_Omega A(x, x/epsilon) nabla u_epsilon (x) dot nabla phi(x) dd(x)
+integral_Omega A(x, x/epsilon) gradient u_epsilon (x) dot gradient phi(x) dd(x)
 = integral_Omega f(x)phi(x) dd(x)
 quad forall phi in H_0^1(Omega)
 $ <e_e_eqw>
@@ -492,41 +492,41 @@ $ <e_e_eqw>
 また、極限方程式（二スケール均質化方程式系）は
 $
 cases(
-	-div_x (lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) angle.r)_y) = f(x) "in" Omega"," ,
-	-div_y (A(x, y)(nabla u(x)+nabla_y v(x, y))) = 0 "in" Omega times TT^N"," ,
+	-div_x (lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) angle.r)_y) = f(x) "in" Omega"," ,
+	-div_y (A(x, y)(gradient u(x)+gradient_y v(x, y))) = 0 "in" Omega times TT^N"," ,
 	u = 0 "on" partial Omega,
 )
 $ <e_lim_eq>
 で弱形式
 $
-integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) dot (nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x) &\
 forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
 $ <e_lim_eqw>
 の意味で一意解$u in H_0^1(Omega)$と$v in L^2(Omega; H^1(TT^N))$を持つ。
 
 #theorem[
-$epsilon -> 0$で$u_epsilon (x)$は$u(x)$に$H_0^1(Omega)$弱収束し、$nabla u_epsilon (x)$は$nabla u(x)+nabla_y v(x , y)$に二スケール弱収束する。
+$epsilon -> 0$で$u_epsilon (x)$は$u(x)$に$H_0^1(Omega)$弱収束し、$gradient u_epsilon (x)$は$gradient u(x)+gradient_y v(x , y)$に二スケール弱収束する。
 ]
 
 #proof[
-前節の定理より部分列を取れば$u$と$v$が存在して$u_epsilon (x)$は$u(x)$に$H_0^1(Omega)$弱収束し$nabla u_epsilon (x)$は$nabla u(x)+nabla_y v(x, y)$に二スケール弱収束する。
+前節の定理より部分列を取れば$u$と$v$が存在して$u_epsilon (x)$は$u(x)$に$H_0^1(Omega)$弱収束し$gradient u_epsilon (x)$は$gradient u(x)+gradient_y v(x, y)$に二スケール弱収束する。
 あとはこの$u, v$が二スケール均質化方程式系の解になっていることを示せば、解の一意性より結論が従う。
 
 滑らかな試験関数$phi(x) in H_0^1(Omega)$と$psi in L^2(Omega; H^1(TT^N))$を固定して、@e_e_eqw の$phi$として$phi_epsilon (x) = phi(x)+epsilon psi(x, x/epsilon)$を代入すると
 $
-integral_Omega A(x, x/epsilon)nabla u_epsilon (x) dot nabla phi_epsilon (x) dd(x)
+integral_Omega A(x, x/epsilon)gradient u_epsilon (x) dot gradient phi_epsilon (x) dd(x)
 = integral_Omega f(x) phi_epsilon (x) dd(x)
 $
 つまり
 $
-integral_Omega A(x, x/epsilon)nabla u_epsilon (x) dot (nabla phi(x)+epsilon nabla_x psi(x, x/epsilon)+nabla_y psi(x, x/epsilon)) dd(x)
+integral_Omega A(x, x/epsilon)gradient u_epsilon (x) dot (gradient phi(x)+epsilon gradient_x psi(x, x/epsilon)+gradient_y psi(x, x/epsilon)) dd(x)
 = integral_Omega f(x) (phi(x)+epsilon psi(x, x/epsilon)) dd(x)
 $ <e_e_phie>
-ここで$A^t (x, y)(nabla phi(x)+nabla_y psi(x, y))$は$L^2(Omega; C(TT^N))^N$に属するので、$A^t (x, x/epsilon)(nabla phi(x)+epsilon nabla_x psi(x, x/epsilon)+nabla_y psi(x, x/epsilon))$はそれに二スケール強収束する。
+ここで$A^t (x, y)(gradient phi(x)+gradient_y psi(x, y))$は$L^2(Omega; C(TT^N))^N$に属するので、$A^t (x, x/epsilon)(gradient phi(x)+epsilon gradient_x psi(x, x/epsilon)+gradient_y psi(x, x/epsilon))$はそれに二スケール強収束する。
 よって、@e_e_phie で$epsilon -> 0$とすると、
 $
-integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) dot (nabla phi(x)+nabla_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x)
 $
 つまり@e_lim_eqw を得る。
@@ -535,32 +535,101 @@ $
 さらに、もし二スケール均質化方程式系の解の規則性が上がるとよりよい収束性が言える。
 
 #theorem[
-もし$v(x, y)$と$nabla_x v(x, y)$（の各成分）と$nabla_y v(x, y)$（の各成分）が$L^2(Omega; C(TT^N))$に属するならば、
+もし$v(x, y)$と$gradient_x v(x, y)$（の各成分）と$gradient_y v(x, y)$（の各成分）が$L^2(Omega; C(TT^N))$に属するならば、
 $u_epsilon (x)-u(x)-epsilon v(x, x/epsilon)$は$0$に$H^1(Omega)$強収束する。
 ]
 
 #proof[
 次の値
 $
-integral_Omega A(x, x/epsilon)(nabla(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon))) dot (nabla(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon))) dd(x)
+integral_Omega A(x, x/epsilon)(gradient(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon))) dot (gradient(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon))) dd(x)
 $
 を考える。
 この項のうち一つは、方程式の弱形式@e_e_eqw で$phi$として$u_epsilon$を選ぶことで、
 $
-integral_Omega A(x, x/epsilon)nabla u_epsilon (x) dot nabla u_epsilon (x) dd(x)
+integral_Omega A(x, x/epsilon)gradient u_epsilon (x) dot gradient u_epsilon (x) dd(x)
 = integral_Omega f(x)u_epsilon (x) dd(x)
 -> integral_Omega f(x)u(x) dd(x)
 $
 である。
 それ以外の項は二スケール収束性を使うことと一様楕円性条件より
 $
-&limsup_(epsilon -> 0) alpha norm(nabla(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon)))_(L^2(Omega))^2 \
-&quad <= integral_Omega f(x)u(x) dd(x)-integral_Omega lr(angle.l A(x, y)(nabla u(x)+nabla_y v(x, y)) dot (nabla u(x)+nabla_y v(x, y)) angle.r)_y dd(x)
+&limsup_(epsilon -> 0) alpha norm(gradient(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon)))_(L^2(Omega))^2 \
+&quad <= integral_Omega f(x)u(x) dd(x)-integral_Omega lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient u(x)+gradient_y v(x, y)) angle.r)_y dd(x)
 $
 となり、二スケール均質化方程式系の弱形式（@e_lim_eqw）で$(phi, psi) = (u, v)$とすることで、右辺は$0$であることがわかるので定理の証明が完成する。
 ]
 
 以降では@r_a12 の内容に基づき、$A$が$y$変数のみに依存する場合の均質化拡散係数$macron(A)$の特徴づけを行う。
+
+この時、二スケール均質化方程式系の弱形式は
+$
+integral_Omega lr(angle.l A(y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
+= integral_Omega f(x)phi(x) dd(x) &\
+forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
+$
+である。
+ここで、特殊な$f$を取ることで解$u$の勾配が定数ベクトル$xi$になったとして、その時の解を$u_xi(x), v_xi(x, y)$とおくと、
+$
+integral_Omega lr(angle.l A(y)(xi+gradient_y v_xi (x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
+= integral_Omega f(x)phi(x) dd(x) &\
+forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
+$
+で、特に$phi = 0$を選ぶことで
+$
+integral_Omega lr(angle.l A(y)(xi+gradient_y v_xi (x, y)) dot gradient_y psi(x, y) angle.r)_y dd(x) = 0
+quad forall psi in L^2(Omega; H^1(TT^N))
+$
+が成り立つ。
+ここから$v_xi$は$x$によらないことがわかり、$v_xi (x, y) = v_xi (y)$とおくことができ、
+$
+lr(angle.l A(y)(xi+gradient_y v_xi (y)) dot gradient_y psi(y) angle.r)_y = 0
+quad forall psi in H^1(TT^N)
+$
+を得る。
+なお、フレドホルムの交代定理よりこの方程式は（定数差を許せば一意な）解$v_xi$を持つことが知られている。
+
+次に$bold(e)_1, dots, bold(e)_N$を$RR^N$の標準基底とし、$v_i = v_(bold(e)_i)$とおく。
+この時、二スケール均質化方程式系の解のうち$v$は$u$と$v_i$を使って
+$
+v(x, y) = sum_(i=1)^N u_(x_i) (x) v_i (y)
+$
+と表せることを示す。
+実際、$gradient u(x) = sum_(i=1)^N u_(x_i) (x) bold(e_i)$に注意して、線形性から
+$
+lr(angle.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) dot gradient_y psi(y) angle.r)_y = 0
+quad forall psi in H^1(TT^N)
+$
+???
+
+ここで二スケール均質化方程式系の弱形式に代入して$psi = 0$とすれば、
+$
+integral_Omega lr(angle.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) dot gradient phi(x) angle.r)_y dd(x)
+= integral_Omega f(x)phi(x) dd(x)
+quad forall phi in H^1_0(Omega).
+$
+$u$が満たす方程式の拡散係数$macron(A)$を考えると、
+$
+lr(angle.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) angle.r)_y
+&= lr(angle.l A(y) angle.r)_y gradient u(x)+sum_(i=1)^N lr(angle.l A(y) gradient_y v_i (y) angle.r)_y u_(x_i) (x) \
+&= lr(angle.l A(y)+sum_(i=1)^N A(y) gradient_y v_i (y) times.circle bold(e)_i angle.r)_y gradient u(x)
+$
+より、
+$
+macron(A) = lr(angle.l A(y)+sum_(i=1)^N A(y) gradient_y v_i (y) times.circle bold(e)_i angle.r)_y.
+$
+ここから
+$
+macron(A)_(i j)
+= lr(angle.l A_(i j) (y)+A(y) gradient v_(i) (y) dot bold(e)_j angle.r)_y
+= lr(angle.l A(y) (bold(e)_i+gradient v_(i) (y)) dot bold(e)_j angle.r)_y
+$
+で、さらに$xi = bold(e)_i$の方程式で$psi = v_j$とした時の式を使うと
+$
+macron(A)_(i j)
+= lr(angle.l A(y) (bold(e)_i+gradient v_(i) (y)) dot (bold(e)_j+gradient v_(j) (y)) angle.r)_y
+$
+を得る。
 
 == 種々の積分の計算
 
