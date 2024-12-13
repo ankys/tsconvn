@@ -489,7 +489,7 @@ integral_Omega A(x, x/epsilon) gradient u_epsilon (x) dot gradient phi(x) dd(x)
 quad forall phi in H_0^1(Omega)
 $ <e_e_eqw>
 の意味で一意解$u_epsilon (x) in H_0^1(Omega)$を持ちアプリオリ評価$sup_epsilon norm(u_epsilon)_(H^1(Omega)) < oo$を満たす。
-また、極限方程式（二スケール均質化方程式系）は
+また、極限方程式（_二スケール均質化方程式系_）は
 $
 cases(
 	-div_x (lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) angle.r)_y) = f(x) "in" Omega"," ,
@@ -581,7 +581,7 @@ integral_Omega lr(angle.l A(y)(xi+gradient_y v_xi (x, y)) dot gradient_y psi(x, 
 quad forall psi in L^2(Omega; H^1(TT^N))
 $
 が成り立つ。
-ここから$v_xi$は$x$によらないことがわかり、$v_xi (x, y) = v_xi (y)$とおくことができ、
+ここから$v_xi$は$x$によらないことがわかり、$v_xi (x, y) = v_xi (y)$とおくことができ、_セル問題_
 $
 lr(angle.l A(y)(xi+gradient_y v_xi (y)) dot gradient_y psi(y) angle.r)_y = 0
 quad forall psi in H^1(TT^N)
@@ -624,12 +624,37 @@ macron(A)_(i j)
 = lr(angle.l A_(i j) (y)+A(y) gradient v_(i) (y) dot bold(e)_j angle.r)_y
 = lr(angle.l A(y) (bold(e)_i+gradient v_(i) (y)) dot bold(e)_j angle.r)_y
 $
-で、さらに$xi = bold(e)_i$の方程式で$psi = v_j$とした時の式を使うと
+で、さらに$xi = bold(e)_i$のセル問題で$psi = v_j$とした時の式を使うと
 $
 macron(A)_(i j)
 = lr(angle.l A(y) (bold(e)_i+gradient v_(i) (y)) dot (bold(e)_j+gradient v_(j) (y)) angle.r)_y
 $
 を得る。
+
+以上の議論をまとめると、二スケール均質化方程式系の解の$v$が$u$と$v_i$を使って表せることと、均質化拡散係数$macron(A)$が$v_i$のセル問題の解を使って表せることがわかる。
+特に$macron(A)$は$Omega$や$f$の取り方によらない。
+
+#example[
+一次元$N = 1$の場合を考えて、$A(y) = a(y) > 0$とする。
+この時、セル問題は
+$
+lr(angle.l a(y)(1+v_y (y)) psi_y (y) angle.r)_y = 0
+quad forall psi in H^1(TT)
+$
+である。
+解くと$c$を積分定数として$a(y)(1+v_y (y)) = c$で、$a(y)$で割って積分すると$v$は周期関数より
+$
+1 = c lr(angle.l a(y)^(-1) angle.r)_y.
+$
+よって、$c$は$a(y)$の調和平均となり、均質化拡散係数$macron(a)$は
+$
+macron(a)
+= lr(angle.l a(y)(1+v_y (y)) angle.r)_y
+= c
+= lr(angle.l a(y)^(-1) angle.r)_y^(-1)
+$
+となる。
+]
 
 == 種々の積分の計算
 
