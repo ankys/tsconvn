@@ -17,7 +17,11 @@ jobs:
         uses: lvignoli/typst-action@main
         with:
           source_file: main.typ
-          options: --font-path ./fonts/ --output ${{github.repository}}-${{github.ref_name}}.pdf
+          options:
+            - --font-path
+            - ./fonts/
+            - --output
+            - ${{github.repository}}-${{github.ref_name}}.pdf
       # Create Release
       - name: Create Release
         uses: softprops/action-gh-release@v2
