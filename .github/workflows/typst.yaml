@@ -14,18 +14,12 @@ jobs:
         uses: actions/checkout@v4
       # Compile main.typ
       - name: Compile Typst File
-        uses: lvignoli/typst-action@main
-        with:
-          source_file: main.typ
-          options: |
-            --font-path
-            ./fonts/
-            --output
-            ${{github.repository}}-${{github.ref_name}}.pdf
+        uses: typst-community/setup-typst@v3
+        run: typst compile main.typ ${{github.repository}}-${{github.ref_name}}.pdf --font-path ./fonts/
       # Create Release
       - name: Create Release
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
-          name: ${{github.repository}} - ${{github.ref_name}}
+          name: ${{github.ref_name}}
           files: ${{github.repository}}-${{github.ref_name}}.pdf
