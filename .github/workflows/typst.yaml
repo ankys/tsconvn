@@ -13,8 +13,9 @@ jobs:
       - name: Checkout Git repository
         uses: actions/checkout@v4
       # Compile main.typ
-      - name: Compile Typst File
+      - name: Setup Typst
         uses: typst-community/setup-typst@v3
+      - name: Compile Typst file
         run: typst compile main.typ ${{github.repository}}-${{github.ref_name}}.pdf --font-path ./fonts/
       # Create Release
       - name: Create Release
