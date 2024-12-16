@@ -609,7 +609,7 @@ $
 lr(angle.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) dot gradient_y psi(y) angle.r)_y = 0
 quad forall psi in H^1(TT^N)
 $
-???
+でこの方程式の解の一意性から上記の式がわかる。
 
 ここで二スケール均質化方程式系の弱形式に代入して$psi = 0$とすれば、
 $
@@ -630,13 +630,13 @@ $
 ここから
 $
 macron(A)_(i j)
-= lr(angle.l A_(i j) (y)+A(y) gradient v_(i) (y) dot bold(e)_j angle.r)_y
-= lr(angle.l A(y) (bold(e)_i+gradient v_(i) (y)) dot bold(e)_j angle.r)_y
+= lr(angle.l A_(i j) (y)+A(y) gradient v_(j) (y) dot bold(e)_i angle.r)_y
+= lr(angle.l A(y) (bold(e)_j+gradient v_(j) (y)) dot bold(e)_i angle.r)_y
 $
-で、さらに$xi = bold(e)_i$のセル問題で$psi = v_j$とした時の式を使うと
+で、さらに$xi = bold(e)_j$のセル問題で$psi = v_i$とした時の式を使うと
 $
 macron(A)_(i j)
-= lr(angle.l A(y) (bold(e)_i+gradient v_(i) (y)) dot (bold(e)_j+gradient v_(j) (y)) angle.r)_y
+= lr(angle.l A(y) (bold(e)_j+gradient v_(j) (y)) dot (bold(e)_i+gradient v_(i) (y)) angle.r)_y
 $
 を得る。
 
