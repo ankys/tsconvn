@@ -6,7 +6,7 @@
 
 #import "@preview/rubber-article:0.1.0": *
 #show: article.with(lang: "ja")
-// #set text(font: ("YuMincho", "Zen Old Mincho", "Zen Kaku Gothic New"))
+#set text(font: ("Libertinus Serif", "YuMincho", "Noto Serif CJK JP"))
 #set par(first-line-indent: 1em)
 #show heading: it => {
 	it

@@ -13,10 +13,12 @@ jobs:
       - name: Checkout Git repository
         uses: actions/checkout@v4
       # Compile main.typ
+      - name: Setup fonts
+        run: sudo apt update && sudo apt install -y fonts-noto-cjk
       - name: Setup Typst
         uses: typst-community/setup-typst@v3
       - name: Compile Typst file
-        run: typst compile main.typ ${{github.event.repository.name}}-${{github.ref_name}}.pdf --font-path ./fonts/
+        run: typst compile main.typ ${{github.event.repository.name}}-${{github.ref_name}}.pdf
       # Create Release
       - name: Create Release
         uses: softprops/action-gh-release@v2
