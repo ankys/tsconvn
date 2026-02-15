@@ -1,3 +1,12 @@
 {
-	"postCreateCommand": "sudo apt update && sudo apt install -y fonts-noto-cjk"
+	"name": "Dev",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"postCreateCommand": "sudo bash .scripts/setup_fonts.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"myriad-dreamin.tinymist"
+			]
+		}
+	}
 }

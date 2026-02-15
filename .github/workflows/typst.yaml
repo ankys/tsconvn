@@ -9,20 +9,20 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v4
       # Compile main.typ
       - name: Setup fonts
-        run: sudo apt update && sudo apt install -y fonts-noto-cjk
+        run: sudo bash .scripts/setup_fonts.sh
       - name: Setup Typst
-        uses: typst-community/setup-typst@v3
+        uses: typst-community/setup-typst@v4
       - name: Compile Typst file
-        run: typst compile main.typ ${{github.event.repository.name}}-${{github.ref_name}}.pdf
+        run: bash .scripts/build.sh ${{github.ref_name}}
       # Create Release
       - name: Create Release
-        uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
-        with:
-          name: ${{github.ref_name}}
-          files: ${{github.event.repository.name}}-${{github.ref_name}}.pdf
+        run: gh release create ${{github.ref_name}} output/*.pdf --generate-notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
