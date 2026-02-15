@@ -4,23 +4,29 @@
 // #let date = datetime.today().display()
 #let date = [2024年12月13日]
 
-#import "@preview/rubber-article:0.1.0": *
-#show: article.with(lang: "ja")
-#set text(font: ("Libertinus Serif", "YuMincho", "Noto Serif CJK JP"))
-#set par(first-line-indent: 1em)
-#show heading: it => {
-	it
-	par(text(size: 0pt, ""))
-}
+#import "@preview/js:0.1.3": js, maketitle
+#show: js.with(
+	book: false,
+	lang: "ja",
+	paper: "a4",
+	// seriffont: "New Computer Modern",
+	// seriffont-cjk: "Harano Aji Mincho",
+	// sansfont: "Source Sans Pro",
+	// sansfont-cjk: "Harano Aji Gothic",
+)
+#set ref(supplement: auto)
+#set par(first-line-indent: 1em) // why
+#show math.equation.where(block: true): block.with(width: 100%)
 
-#import "@preview/physica:0.9.3": dv, dd
+#import "@preview/physica:0.9.8": dv, dd
 #import "@preview/ctheorems:1.1.3": thmrules, thmplain, thmbox, thmproof
-
 #show: thmrules.with()
 #let theorem = thmbox("theorem", "定理", stroke: black)
+#let lemma = thmbox("theorem", "補題", stroke: black)
 #let proposition = thmbox("theorem", "命題", stroke: black)
 #let definition = thmbox("theorem", "定義", stroke: black)
-#let example = thmplain("theorem", "例");
+#let corollary = thmbox("theorem", "系", stroke: black)
+#let example = thmplain("theorem", "例")
 #let xca = thmplain("theorem", "練習問題")
 #let remark = thmplain("theorem", "注意")
 // #let proof = thmproof("proof", "証明")
@@ -29,13 +35,12 @@
 	if args != none and args.pos().len() > 0 {
 		name = args.pos().first()
 	}
-	return [
-		【#name】#body #h(1fr)【証明終わり】
+	return block[
+		【#name】#body#h(1fr)【証明終わり】
 	]
 }
 
 #import "deps/autoeqnum.typ": autoeqnum
-
 #show heading.where(level: 2): set heading(level: 1)
 #show heading.where(level: 2): it => {
 	counter(math.equation).update(0)
@@ -151,11 +156,11 @@ $square$を$RR^N$の単位立方体、つまり$square = \[0, 1\)^N$とする。
 $
 lim_(epsilon -> 0) integral_Omega f(x, x/epsilon) dd(x)
 = lim_(n -> oo) integral_Omega f(x, n x) dd(x)
-= integral_Omega lr(angle.l f(x, y) angle.r)_y dd(x)
+= integral_Omega lr(chevron.l f(x, y) chevron.r)_y dd(x)
 = integral_Omega 1/abs(square) integral_square f(x, y) dd(y) dd(x)
 $ <e_tsconv_p>
 を示すことである。
-ここで$lr(angle.l f(x, y) angle.r)_y = 1/abs(square) integral_square f(x, y) dd(y)$は$f(x, y)$の$y$変数に関する平均を表す。
+ここで$lr(chevron.l f(x, y) chevron.r)_y = 1/abs(square) integral_square f(x, y) dd(y)$は$f(x, y)$の$y$変数に関する平均を表す。
 $abs(square)$は$square$のルベーグ測度でありその値は$1$であるが、$ZZ^N$-周期的とは限らない場合のためにこのように書いている。
 また、最左辺の$epsilon$は正の実数を、第2辺の$n$は正の整数を想定しているため、最左辺と最右辺が一致することを示せば十分である。
 この@e_tsconv_p のことを本ノートでは_二スケール収束の基本公式_と呼ぶことにする。
@@ -214,9 +219,9 @@ $f in L^1(Omega; C(TT^N))$とすると、$norm(f(x, x/epsilon))_(L^1(Omega)) <= 
 この時示すべき式は
 $
 lim_(epsilon -> 0) integral_Omega phi(x)g(x/epsilon) dd(x)
-= integral_Omega phi(x)lr(angle.l g angle.r) dd(x)
+= integral_Omega phi(x)lr(chevron.l g chevron.r) dd(x)
 $ <e_tsconv_p_sep>
-とでき、$ZZ^N$-周期的な関数$g$に対して$L^oo (RR^N)$関数の列$g(x/epsilon)$が$epsilon -> 0$で平均$lr(angle.l g angle.r)$に汎弱収束することを意味する。
+とでき、$ZZ^N$-周期的な関数$g$に対して$L^oo (RR^N)$関数の列$g(x/epsilon)$が$epsilon -> 0$で平均$lr(chevron.l g chevron.r)$に汎弱収束することを意味する。
 この式も近似することを考えると$phi$,
 $g$を区間の直積の指示関数の場合に示せばよく、次の1次元の場合に帰着される。
 つまり、$L^oo (TT)$関数$g$と実数$a < b$に対して、
@@ -244,9 +249,9 @@ $
 を定めると、$x |-> f(x, y_i)$は$L^1(Omega)$なので$f_n$は変数分離された関数の有限和より@e_tsconv_p が成り立つ。
 ここで、
 $
-&abs(integral_Omega f(x, x/epsilon) dd(x)-integral_Omega lr(angle.l f(x, y) angle.r)_y dd(x)) \
-&quad <= integral_Omega abs(f(x, x/epsilon)-f_n (x, x/epsilon)) dd(x)+integral_Omega abs(f_n (x, x/epsilon)-lr(angle.l f_n (x, y) angle.r)_y) dd(x)+integral_Omega abs(lr(angle.l f_n (x, y) angle.r)_y-lr(angle.l f (x, y) angle.r)_y) dd(x) \
-&quad <= 2 norm(f_n-f)_(L^1(Omega; C(TT^N)))+integral_Omega abs(f_n (x, x/epsilon)-lr(angle.l f_n (x, y) angle.r)_y) dd(x)
+&abs(integral_Omega f(x, x/epsilon) dd(x)-integral_Omega lr(chevron.l f(x, y) chevron.r)_y dd(x)) \
+&quad <= integral_Omega abs(f(x, x/epsilon)-f_n (x, x/epsilon)) dd(x)+integral_Omega abs(f_n (x, x/epsilon)-lr(chevron.l f_n (x, y) chevron.r)_y) dd(x)+integral_Omega abs(lr(chevron.l f_n (x, y) chevron.r)_y-lr(chevron.l f (x, y) chevron.r)_y) dd(x) \
+&quad <= 2 norm(f_n-f)_(L^1(Omega; C(TT^N)))+integral_Omega abs(f_n (x, x/epsilon)-lr(chevron.l f_n (x, y) chevron.r)_y) dd(x)
 $
 なので、$f_n$が$f$に$L^1(Omega; C(TT^N))$で強収束を示せばよい。
 ここで$g_n (x) = sup_(y in square) abs(f_n (x, y)-f(x, y))$とおくと、$x in Omega\\E$に対して$y |-> f(x, y)$は連続で一様連続でもあるので、分割を細かくするほど$g_n (x) -> 0$となる。
@@ -278,7 +283,7 @@ $L^2(Omega)$の関数列$u_epsilon (x)$を考える。
 ここである$L^2(Omega times TT^N)$関数$u$が存在して、
 $
 integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
--> integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)
+-> integral_Omega lr(chevron.l u(x, y)phi(x, y) chevron.r)_y dd(x)
 quad forall phi in L^2(Omega; C(TT^N))
 $
 が成り立つとき、$u_epsilon (x)$は_二スケール弱収束_するといい、その時の$u(x, y)$を_二スケール極限_という。
@@ -286,7 +291,7 @@ $
 上の条件に加えて
 $
 integral_Omega u_epsilon (x)^2 dd(x)
--> integral_Omega lr(angle.l u(x, y)^2 angle.r)_y dd(x)
+-> integral_Omega lr(chevron.l u(x, y)^2 chevron.r)_y dd(x)
 $
 が成立するとき、$u_epsilon (x)$は_二スケール強収束_するという。
 ]
@@ -301,7 +306,7 @@ $phi in L^2(Omega; C(TT^N))$に対して、$u(x, y)phi(x, y)$は$L^1(Omega; C(TT
 二スケール収束の基本定理より
 $
 integral_Omega u(x, x/epsilon)phi(x, x/epsilon) dd(x)
--> integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)
+-> integral_Omega lr(chevron.l u(x, y)phi(x, y) chevron.r)_y dd(x)
 $
 である。
 $phi = u$とすれば二スケール強収束の条件も得られる。
@@ -319,23 +324,23 @@ $L^2(Omega)$の関数列$u_epsilon (x)$が$macron(u)(x)$に強収束するなら
 #proof[
 $phi in L^2(Omega; C(TT^N))$に対して、
 $
-&abs(integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)-integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)) \
-&quad <= integral_Omega abs(u_epsilon (x)phi(x, x/epsilon)-macron(u)(x)phi(x, x/epsilon)) dd(x)+integral_Omega abs(macron(u)(x)phi(x, x/epsilon)-lr(angle.l macron(u)(x)phi(x, y) angle.r)_y) dd(x) \
-&quad <= norm(u_epsilon-u)_(L^2(Omega))norm(phi(x, x/epsilon))_(L^2(Omega))+integral_Omega abs(macron(u)(x)phi(x, x/epsilon)-lr(angle.l macron(u)(x)phi(x, y) angle.r)_y) dd(x)
+&abs(integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)-integral_Omega lr(chevron.l u(x, y)phi(x, y) chevron.r)_y dd(x)) \
+&quad <= integral_Omega abs(u_epsilon (x)phi(x, x/epsilon)-macron(u)(x)phi(x, x/epsilon)) dd(x)+integral_Omega abs(macron(u)(x)phi(x, x/epsilon)-lr(chevron.l macron(u)(x)phi(x, y) chevron.r)_y) dd(x) \
+&quad <= norm(u_epsilon-u)_(L^2(Omega))norm(phi(x, x/epsilon))_(L^2(Omega))+integral_Omega abs(macron(u)(x)phi(x, x/epsilon)-lr(chevron.l macron(u)(x)phi(x, y) chevron.r)_y) dd(x)
 $
 ここで前半は$norm(phi(x, x/epsilon))_(L^2(Omega)) <= norm(phi)_(L^2(Omega; C(TT^N))) < oo$より仮定から$0$に収束し、後半も二スケール収束の基本定理より$0$に収束する。
 したがって、二スケール弱収束が言えて、二スケール強収束は通常の強収束からノルムが収束する$norm(u_epsilon)_(L^2(Omega)) -> norm(macron(u))_(L^2(Omega))$ことからわかる。
 ]
 
 #proposition[
-$L^2(Omega)$の関数列$u_epsilon (x)$が$u(x, y) in L^2(Omega times TT^N)$に二スケール弱収束するならば、$u_epsilon (x)$は$macron(u)(x) = lr(angle.l u(x, y) angle.r)_y$に弱収束する。
+$L^2(Omega)$の関数列$u_epsilon (x)$が$u(x, y) in L^2(Omega times TT^N)$に二スケール弱収束するならば、$u_epsilon (x)$は$macron(u)(x) = lr(chevron.l u(x, y) chevron.r)_y$に弱収束する。
 ]
 
 #proof[
 $phi in L^2(Omega)$に対して、$phi in L^2(Omega; C(TT^N))$とみなせるので、
 $
 integral_Omega u_epsilon (x)phi(x) dd(x)
--> integral_Omega lr(angle.l u(x, y)phi(x) angle.r)_y dd(x)
+-> integral_Omega lr(chevron.l u(x, y)phi(x) chevron.r)_y dd(x)
 = integral_Omega macron(u)phi(x) dd(x)
 $
 より成立する。
@@ -345,7 +350,7 @@ $
 $L^2(Omega)$の関数列$u_epsilon (x)$が$u(x, y) in L^2(Omega times TT^N)$に二スケール弱収束し$L^2(Omega)$の関数列$v_epsilon (x)$が$v(x, y) in L^2(Omega times TT^N)$に二スケール強収束するとき、
 $
 integral_Omega u_epsilon (x)v_epsilon (x) dd(x)
--> integral_Omega lr(angle.l u(x, y)v(x, y) angle.r)_y dd(x)
+-> integral_Omega lr(chevron.l u(x, y)v(x, y) chevron.r)_y dd(x)
 $
 が成り立つ。
 ]
@@ -356,15 +361,15 @@ $
 $
 integral_Omega (v_epsilon (x)-v(x, x/epsilon))^2 dd(x)
 &= integral_Omega (v_epsilon (x)^2-2 v_epsilon (x)v(x, x/epsilon)+v(x, x/epsilon)^2) dd(x) \
-&-> integral_Omega lr(angle.l v(x, y)^2-2 v(x, y)v(x, y)+v(x, y)^2 angle.r)_y dd(x)
+&-> integral_Omega lr(chevron.l v(x, y)^2-2 v(x, y)v(x, y)+v(x, y)^2 chevron.r)_y dd(x)
 = 0
 $
 である。
 ここで、
 $
-&abs(integral_Omega u_epsilon (x)v_epsilon (x) dd(x)-integral_Omega lr(angle.l u(x, y)v(x, y) angle.r)_y dd(x)) \
-&quad <= integral_Omega abs(u_epsilon (x)v_epsilon (x)-u_epsilon (x)v(x, x/epsilon)) dd(x)+integral_Omega abs(u_epsilon (x)v(x, x/epsilon)-lr(angle.l u(x, y)v(x, y) angle.r)_y) dd(x) \
-&quad <= norm(u_epsilon)_(L^2(Omega))norm(v_epsilon (x)-v(x, x/epsilon))_(L^2(Omega))+integral_Omega abs(u_epsilon (x)v(x, x/epsilon)-lr(angle.l u(x, y)v(x, y) angle.r)_y) dd(x)
+&abs(integral_Omega u_epsilon (x)v_epsilon (x) dd(x)-integral_Omega lr(chevron.l u(x, y)v(x, y) chevron.r)_y dd(x)) \
+&quad <= integral_Omega abs(u_epsilon (x)v_epsilon (x)-u_epsilon (x)v(x, x/epsilon)) dd(x)+integral_Omega abs(u_epsilon (x)v(x, x/epsilon)-lr(chevron.l u(x, y)v(x, y) chevron.r)_y) dd(x) \
+&quad <= norm(u_epsilon)_(L^2(Omega))norm(v_epsilon (x)-v(x, x/epsilon))_(L^2(Omega))+integral_Omega abs(u_epsilon (x)v(x, x/epsilon)-lr(chevron.l u(x, y)v(x, y) chevron.r)_y) dd(x)
 $
 であり、$u_epsilon (x)$は二スケール弱収束することから通常の弱収束してノルム有界であることに注意して、命題の主張が得られる。
 ]
@@ -391,37 +396,37 @@ abs(integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x))
 $ <e_bddcpt_tsw>
 このことは$epsilon$ごとに$L^2 (Omega ; C (TT^N))$上の有界線形形式を与え双対空間の元$U_epsilon in L^2(Omega; C(TT^N))^*$が対応し
 $
-lr(angle.l U_epsilon, phi angle.r)
+lr(chevron.l U_epsilon, phi chevron.r)
 = integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
 quad forall phi in L^2(Omega; C(TT^N))
 $
-となり、さらに$norm(U_epsilon) <= C$であることを表す（ここでの$lr(angle.l U_epsilon, phi angle.r)$は平均ではなく線形形式の値）。
+となり、さらに$norm(U_epsilon) <= C$であることを表す（ここでの$lr(chevron.l U_epsilon, phi chevron.r)$は平均ではなく線形形式の値）。
 ここで、$L^2(Omega; C(TT^N))$は可分なバナッハ空間なので、バナッハ・アラオグルの定理より$U_epsilon$は必要なら部分列を取ればある$U in L^2(Omega; C(TT^N))^*$に汎弱収束する、つまり
 $
-lr(angle.l U_epsilon, phi angle.r)
+lr(chevron.l U_epsilon, phi chevron.r)
 = integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
--> lr(angle.l U, phi angle.r)
+-> lr(chevron.l U, phi chevron.r)
 quad forall phi in L^2(Omega; C(TT^N))
 $
 である。
 ここで@e_bddcpt_tsw の評価を二つ目の不等号で止めた
 $
-abs(lr(angle.l U_epsilon, phi angle.r))
+abs(lr(chevron.l U_epsilon, phi chevron.r))
 <= C norm(phi(x, x/epsilon))_(L^2(Omega))
 $
 を考えると、$epsilon$についての極限を取り二スケール収束の基本定理から
 $
-abs(lr(angle.l U, phi angle.r))
+abs(lr(chevron.l U, phi chevron.r))
 <= C norm(phi)_(L^2(Omega times TT^N))
 quad forall phi in L^2(Omega; C(TT^N))
 $
 ここで$L^2(Omega; C(TT^N))$は$L^2(Omega times TT^N)$の稠密な部分集合であることに注意すると、
 リースの表現定理より$u = u(x, y) in L^2(Omega times TT^N)$が存在して
 $
-lr(angle.l U_epsilon, phi angle.r)
+lr(chevron.l U_epsilon, phi chevron.r)
 = integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
--> lr(angle.l U, phi angle.r)
-= integral_Omega lr(angle.l u(x, y)phi(x, y) angle.r)_y dd(x)
+-> lr(chevron.l U, phi chevron.r)
+= integral_Omega lr(chevron.l u(x, y)phi(x, y) chevron.r)_y dd(x)
 quad forall phi in L^2(Omega; C(TT^N))
 $
 を得る。
@@ -439,12 +444,12 @@ $H_0^1(Omega)$の有界な関数列$u_epsilon (x)$がある関数$u(x) in H_0^1(
 $u_epsilon$と$gradient u_epsilon$（の各成分）は$L^2(Omega)$で有界なので、必要なら部分列を取れば二スケール弱収束する、つまり$tilde(u)(x, y) in L^2(Omega times TT^N)$と$p(x, y) in L^2(Omega times TT^N)^N$が存在して、
 $
 integral_Omega u_epsilon (x)phi(x, x/epsilon) dd(x)
--> integral_Omega lr(angle.l tilde(u)(x, y)phi(x, y) angle.r)_y dd(x)
+-> integral_Omega lr(chevron.l tilde(u)(x, y)phi(x, y) chevron.r)_y dd(x)
 quad forall phi in L^2(Omega; C(TT^N)),
 $
 $
 integral_Omega gradient u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
--> integral_Omega lr(angle.l p(x, y)Phi(x, y) angle.r)_y dd(x)
+-> integral_Omega lr(chevron.l p(x, y)Phi(x, y) chevron.r)_y dd(x)
 quad forall Phi in L^2(Omega; C(TT^N))^N
 $
 が成り立つ。
@@ -456,20 +461,20 @@ integral_Omega gradient u_epsilon (x) dot Phi(x, x/epsilon) dd(x)
 $
 $u_epsilon (x)$は$tilde(u)(x, y)$に二スケール弱収束することから、まず
 $
--integral_Omega lr(angle.l tilde(u)(x, y)div_y Phi(x, x/epsilon) angle.r)_y dd(x) = 0
+-integral_Omega lr(chevron.l tilde(u)(x, y)div_y Phi(x, x/epsilon) chevron.r)_y dd(x) = 0
 $
 がわかる。
 これは$tilde(u)(x, y)$が$y$変数によらないことを表していて、弱収束極限の一意性から$tilde(u)(x, y) = u(x)$である。
 さらに$div_y Phi(x, y) = 0$を満たすような$Phi$に制限すると、
 $
-integral_Omega lr(angle.l p(x, y)Phi(x, y) angle.r)_y dd(x)
-= -integral_Omega lr(angle.l tilde(u)(x, y)div_x Phi(x, x/epsilon) angle.r)_y dd(x)
+integral_Omega lr(chevron.l p(x, y)Phi(x, y) chevron.r)_y dd(x)
+= -integral_Omega lr(chevron.l tilde(u)(x, y)div_x Phi(x, x/epsilon) chevron.r)_y dd(x)
 $
 もわかり、部分積分を戻すと
 $
--integral_Omega lr(angle.l tilde(u)(x, y)div_x Phi(x, x/epsilon) angle.r)_y dd(x)
-= -integral_Omega lr(angle.l u(x)div_x Phi(x, x/epsilon) angle.r)_y dd(x)
-= integral_Omega lr(angle.l gradient u(x) dot Phi(x, x/epsilon) angle.r)_y dd(x)
+-integral_Omega lr(chevron.l tilde(u)(x, y)div_x Phi(x, x/epsilon) chevron.r)_y dd(x)
+= -integral_Omega lr(chevron.l u(x)div_x Phi(x, x/epsilon) chevron.r)_y dd(x)
+= integral_Omega lr(chevron.l gradient u(x) dot Phi(x, x/epsilon) chevron.r)_y dd(x)
 $
 なので、$div_y Phi(x, y) = 0$だったことから$v(x, y) in L^2(Omega; H^1(TT^N))$が存在して$p(x, y) = gradient u(x)+gradient_y v(x, y)$を得る。
 ]
@@ -501,14 +506,14 @@ $ <e_e_eqw>
 また、極限方程式（_二スケール均質化方程式系_）は
 $
 cases(
-	-div_x (lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) angle.r)_y) = f(x) "in" Omega"," ,
+	-div_x (lr(chevron.l A(x, y)(gradient u(x)+gradient_y v(x, y)) chevron.r)_y) = f(x) "in" Omega"," ,
 	-div_y (A(x, y)(gradient u(x)+gradient_y v(x, y))) = 0 "in" Omega times TT^N"," ,
 	u = 0 "on" partial Omega,
 )
 $ <e_lim_eq>
 で弱形式
 $
-integral_Omega lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(chevron.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) chevron.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x) &\
 forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
 $ <e_lim_eqw>
@@ -535,7 +540,7 @@ $ <e_e_phie>
 ここで$A^t (x, y)(gradient phi(x)+gradient_y psi(x, y))$は$L^2(Omega; C(TT^N))^N$に属するので、$A^t (x, x/epsilon)(gradient phi(x)+epsilon gradient_x psi(x, x/epsilon)+gradient_y psi(x, x/epsilon))$はそれに二スケール強収束する。
 よって、@e_e_phie で$epsilon -> 0$とすると、
 $
-integral_Omega lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(chevron.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) chevron.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x)
 $
 つまり@e_lim_eqw を得る。
@@ -564,7 +569,7 @@ $
 それ以外の項は二スケール収束性を使うことと一様楕円性条件より
 $
 &limsup_(epsilon -> 0) alpha norm(gradient(u_epsilon (x)-u(x)-epsilon v(x, x/epsilon)))_(L^2(Omega))^2 \
-&quad <= integral_Omega f(x)u(x) dd(x)-integral_Omega lr(angle.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient u(x)+gradient_y v(x, y)) angle.r)_y dd(x)
+&quad <= integral_Omega f(x)u(x) dd(x)-integral_Omega lr(chevron.l A(x, y)(gradient u(x)+gradient_y v(x, y)) dot (gradient u(x)+gradient_y v(x, y)) chevron.r)_y dd(x)
 $
 となり、二スケール均質化方程式系の弱形式（@e_lim_eqw）で$(phi, psi) = (u, v)$とすることで、右辺は$0$であることがわかるので定理の証明が完成する。
 ]
@@ -573,26 +578,26 @@ $
 
 この時、二スケール均質化方程式系の弱形式は
 $
-integral_Omega lr(angle.l A(y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(chevron.l A(y)(gradient u(x)+gradient_y v(x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) chevron.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x) &\
 forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
 $
 である。
 ここで、特殊な$f$を取ることで解$u$の勾配が定数ベクトル$xi$になったとして、その時の解を$u_xi (x), v_xi (x, y)$とおくと、
 $
-integral_Omega lr(angle.l A(y)(xi+gradient_y v_xi (x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) angle.r)_y dd(x)
+integral_Omega lr(chevron.l A(y)(xi+gradient_y v_xi (x, y)) dot (gradient phi(x)+gradient_y psi(x, y)) chevron.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x) &\
 forall phi in H^1_0(Omega), psi in L^2(Omega; H^1(TT^N)) &
 $
 で、特に$phi = 0$を選ぶことで
 $
-integral_Omega lr(angle.l A(y)(xi+gradient_y v_xi (x, y)) dot gradient_y psi(x, y) angle.r)_y dd(x) = 0
+integral_Omega lr(chevron.l A(y)(xi+gradient_y v_xi (x, y)) dot gradient_y psi(x, y) chevron.r)_y dd(x) = 0
 quad forall psi in L^2(Omega; H^1(TT^N))
 $
 が成り立つ。
 ここから$v_xi$は$x$によらないことがわかり、$v_xi (x, y) = v_xi (y)$とおくことができ、_セル問題_
 $
-lr(angle.l A(y)(xi+gradient_y v_xi (y)) dot gradient_y psi(y) angle.r)_y = 0
+lr(chevron.l A(y)(xi+gradient_y v_xi (y)) dot gradient_y psi(y) chevron.r)_y = 0
 quad forall psi in H^1(TT^N)
 $
 を得る。
@@ -606,37 +611,37 @@ $
 と表せることを示す。
 実際、$gradient u(x) = sum_(i=1)^N u_(x_i) (x) bold(e_i)$に注意して、線形性から
 $
-lr(angle.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) dot gradient_y psi(y) angle.r)_y = 0
+lr(chevron.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) dot gradient_y psi(y) chevron.r)_y = 0
 quad forall psi in H^1(TT^N)
 $
 でこの方程式の解の一意性から上記の式がわかる。
 
 ここで二スケール均質化方程式系の弱形式に代入して$psi = 0$とすれば、
 $
-integral_Omega lr(angle.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) dot gradient phi(x) angle.r)_y dd(x)
+integral_Omega lr(chevron.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) dot gradient phi(x) chevron.r)_y dd(x)
 = integral_Omega f(x)phi(x) dd(x)
 quad forall phi in H^1_0(Omega).
 $
 $u$が満たす方程式の拡散係数$macron(A)$を考えると、
 $
-lr(angle.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) angle.r)_y
-&= lr(angle.l A(y) angle.r)_y gradient u(x)+sum_(i=1)^N lr(angle.l A(y) gradient_y v_i (y) angle.r)_y u_(x_i) (x) \
-&= lr(angle.l A(y)+sum_(i=1)^N A(y) gradient_y v_i (y) times.circle bold(e)_i angle.r)_y gradient u(x)
+lr(chevron.l A(y)(gradient u(x)+sum_(i=1)^N u_(x_i) (x) gradient_y v_i (y)) chevron.r)_y
+&= lr(chevron.l A(y) chevron.r)_y gradient u(x)+sum_(i=1)^N lr(chevron.l A(y) gradient_y v_i (y) chevron.r)_y u_(x_i) (x) \
+&= lr(chevron.l A(y)+sum_(i=1)^N A(y) gradient_y v_i (y) times.o bold(e)_i chevron.r)_y gradient u(x)
 $
 より、
 $
-macron(A) = lr(angle.l A(y)+sum_(i=1)^N A(y) gradient_y v_i (y) times.circle bold(e)_i angle.r)_y.
+macron(A) = lr(chevron.l A(y)+sum_(i=1)^N A(y) gradient_y v_i (y) times.o bold(e)_i chevron.r)_y.
 $
 ここから
 $
 macron(A)_(i j)
-= lr(angle.l A_(i j) (y)+A(y) gradient v_(j) (y) dot bold(e)_i angle.r)_y
-= lr(angle.l A(y) (bold(e)_j+gradient v_(j) (y)) dot bold(e)_i angle.r)_y
+= lr(chevron.l A_(i j) (y)+A(y) gradient v_(j) (y) dot bold(e)_i chevron.r)_y
+= lr(chevron.l A(y) (bold(e)_j+gradient v_(j) (y)) dot bold(e)_i chevron.r)_y
 $
 で、さらに$xi = bold(e)_j$のセル問題で$psi = v_i$とした時の式を使うと
 $
 macron(A)_(i j)
-= lr(angle.l A(y) (bold(e)_j+gradient v_(j) (y)) dot (bold(e)_i+gradient v_(i) (y)) angle.r)_y
+= lr(chevron.l A(y) (bold(e)_j+gradient v_(j) (y)) dot (bold(e)_i+gradient v_(i) (y)) chevron.r)_y
 $
 を得る。
 
@@ -647,20 +652,20 @@ $
 一次元$N = 1$の場合を考えて、$A(y) = a(y) > 0$とする。
 この時、セル問題は
 $
-lr(angle.l a(y)(1+v_y (y)) psi_y (y) angle.r)_y = 0
+lr(chevron.l a(y)(1+v_y (y)) psi_y (y) chevron.r)_y = 0
 quad forall psi in H^1(TT)
 $
 である。
 解くと$c$を積分定数として$a(y)(1+v_y (y)) = c$で、$a(y)$で割って積分すると$v$は周期関数より
 $
-1 = c lr(angle.l a(y)^(-1) angle.r)_y.
+1 = c lr(chevron.l a(y)^(-1) chevron.r)_y.
 $
 よって、$c$は$a(y)$の調和平均となり、均質化拡散係数$macron(a)$は
 $
 macron(a)
-= lr(angle.l a(y)(1+v_y (y)) angle.r)_y
+= lr(chevron.l a(y)(1+v_y (y)) chevron.r)_y
 = c
-= lr(angle.l a(y)^(-1) angle.r)_y^(-1)
+= lr(chevron.l a(y)^(-1) chevron.r)_y^(-1)
 $
 となる。
 ]
@@ -668,53 +673,53 @@ $
 以降では$A$は$y$変数のみに依存し、さらに$A(y)$は対称行列とする。
 この時、$macron(A)$も対称行列となり、次の式によって特徴づけられる。
 $
-macron(A)xi dot xi = lr(angle.l A(y)(xi+gradient_y v_xi (y)) dot (xi+gradient_y v_xi (y)) angle.r)_y
+macron(A)xi dot xi = lr(chevron.l A(y)(xi+gradient_y v_xi (y)) dot (xi+gradient_y v_xi (y)) chevron.r)_y
 quad xi in RR^N.
 $
 ただし、$v_xi$はセル問題の解である。
 ここで、$v_xi$はエネルギー
 $
-E_xi [v] = 1/2 lr(angle.l A(y)(xi+gradient_y v(y)) dot (xi+gradient_y v(y)) angle.r)_y
+E_xi [v] = 1/2 lr(chevron.l A(y)(xi+gradient_y v(y)) dot (xi+gradient_y v(y)) chevron.r)_y
 quad v in H^1(TT^N)
 $
 の最小限としても特徴づけられることに注意する。
 そのため、$macron(A)$は次の変分公式を満たす。
 $
-macron(A)xi dot xi = min_(v in H^1(TT^N)) lr(angle.l A(y)(xi+gradient_y v(y)) dot (xi+gradient_y v(y)) angle.r)_y.
+macron(A)xi dot xi = min_(v in H^1(TT^N)) lr(chevron.l A(y)(xi+gradient_y v(y)) dot (xi+gradient_y v(y)) chevron.r)_y.
 $
 
 ここから$v equiv 0$を考えることで、直ちに上からの評価
 $
-macron(A)xi dot xi <= lr(angle.l A(y)xi dot xi angle.r)_y
+macron(A)xi dot xi <= lr(chevron.l A(y)xi dot xi chevron.r)_y
 $
 を得る。
 
 下からの評価は次のようにして得られる。
 まず、勾配の部分を$p(y)$とおき、それが自由に動いた方が関数空間は広がるので、
 $
-macron(A)xi dot xi = min_(p in L^2(TT^N)^N, lr(angle.l p angle.r) = 0) lr(angle.l A(y)(xi+p(y)) dot (xi+p(y)) angle.r)_y.
+macron(A)xi dot xi = min_(p in L^2(TT^N)^N, lr(chevron.l p chevron.r) = 0) lr(chevron.l A(y)(xi+p(y)) dot (xi+p(y)) chevron.r)_y.
 $
 この最小化問題はラグランジュの未定乗数法を使って解くことができ、
 $
 2 A(y)(xi+p(y)) = lambda,
-quad lr(angle.l p angle.r) = 0.
+quad lr(chevron.l p chevron.r) = 0.
 $
 よって、
 $
-lambda = 2 lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi
+lambda = 2 lr(chevron.l A(y)^(-1) chevron.r)_y^(-1) xi
 $
 となり、
 $
 macron(A)xi dot xi
->= 1/4 lr(angle.l lambda dot A(y)^(-1) lambda angle.r)_y
-= lr(angle.l lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi dot A(y)^(-1) lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi angle.r)_y
-= lr(angle.l A(y)^(-1) angle.r)_y^(-1) xi dot xi
+>= 1/4 lr(chevron.l lambda dot A(y)^(-1) lambda chevron.r)_y
+= lr(chevron.l lr(chevron.l A(y)^(-1) chevron.r)_y^(-1) xi dot A(y)^(-1) lr(chevron.l A(y)^(-1) chevron.r)_y^(-1) xi chevron.r)_y
+= lr(chevron.l A(y)^(-1) chevron.r)_y^(-1) xi dot xi
 $
 を得る。
 
 以上をまとめると均質化拡散係数$macron(A)$は
 $
-lr(angle.l A(y)^(-1) angle.r)_y^(-1) <= macron(A) <= lr(angle.l A(y) angle.r)_y
+lr(chevron.l A(y)^(-1) chevron.r)_y^(-1) <= macron(A) <= lr(chevron.l A(y) chevron.r)_y
 $
 を満たす。
 
@@ -800,9 +805,9 @@ $
 なお、この積分をリーマン積分の枠組みでとらえて広義積分だと思っても同じ公式が成り立つ。
 実際、$R > 0$に対して
 $
-&abs(integral_0^oo f(x, n x) dd(x)-integral_0^oo lr(angle.l f(x, y) angle.r)_y dd(x)) \
-&quad <= abs((integral_0^oo-integral_0^R) f(x, n x) dd(x))+integral_0^R abs(f(x, n x)-lr(angle.l f(x, y) angle.r)_y) dd(x)+abs((integral_0^R-integral_0^oo) lr(angle.l f(x, y) angle.r)_y dd(x)) \
-&quad <= 2 integral_R^oo sup_(y) abs(f(x, y)) dd(x)+integral_0^R abs(f(x, n x)-lr(angle.l f(x, y) angle.r)_y) dd(x)
+&abs(integral_0^oo f(x, n x) dd(x)-integral_0^oo lr(chevron.l f(x, y) chevron.r)_y dd(x)) \
+&quad <= abs((integral_0^oo-integral_0^R) f(x, n x) dd(x))+integral_0^R abs(f(x, n x)-lr(chevron.l f(x, y) chevron.r)_y) dd(x)+abs((integral_0^R-integral_0^oo) lr(chevron.l f(x, y) chevron.r)_y dd(x)) \
+&quad <= 2 integral_R^oo sup_(y) abs(f(x, y)) dd(x)+integral_0^R abs(f(x, n x)-lr(chevron.l f(x, y) chevron.r)_y) dd(x)
 $
 と評価できるためである。
 ]
